@@ -1,0 +1,133 @@
+datasource db {
+  provider = "postgres"
+  url      = env("DATABASE_URL")
+}
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+// for future maybe use @db.Timestamptz(x)	with timezone?
+
+model User {
+  id            String   @id @default(uuid())
+  active        Boolean  @default(true)
+  name          String?
+  email         String   @unique
+  mobile        String?
+  cognitoUserId String?  @unique
+  cognitoPoolId String?  @unique
+  role          UserRole @default(ADMIN)
+  createdAt     DateTime @default(now())
+  updatedAt     DateTime @updatedAt
+}
+
+enum UserRole {
+  ADMIN
+  ROOT
+}
+
+model Tenant {
+  id        String    @id @default(uuid())
+  active    Boolean   @default(true)
+  customer  Customer?
+  name      String?
+  metaData  Json?
+  createdAt DateTime  @default(now())
+  updatedAt DateTime  @updatedAt
+}
+
+model Customer {
+  id                   String         @id @default(uuid())
+  active               Boolean        @default(true)
+  tenant               Tenant         @relation(fields: [tenantId], references: [id])
+  tenantId             String         @unique
+  name                 String?
+  email                String         @unique
+  mobile               String?
+  cognitoUserId        String?        @unique
+  cognitoPoolId        String?        @unique
+  stripeCustomerId     String?        @unique
+  stripeBillingAddress Json?
+  stripePaymentMethod  Json?
+  metaData             Json?
+  subscriptions        Subscription[]
+  createdAt            DateTime       @default(now())
+  updatedAt            DateTime       @updatedAt
+}
+
+model Product {
+  id              String   @id @default(uuid())
+  active          Boolean  @default(true)
+  name            String?
+  image           String?
+  description     String?
+  stripeProductId String?  @unique
+  metaData        Json?
+  prices          Price[]
+  createdAt       DateTime @default(now())
+  updatedAt       DateTime @updatedAt
+}
+
+model Price {
+  id            String          @id @default(uuid())
+  active        Boolean         @default(true)
+  product       Product         @relation(fields: [productId], references: [id])
+  productId     String
+  description   String?
+  unitAmount    Int?            @default(1)
+  currency      String?
+  type          pricingType     @default(RECURRING)
+  interval      pricingInterval @default(MONTH)
+  intervalCount Int?            @default(1)
+  trialPeriod   Int?
+  stripePriceId String?         @unique
+  metaData      Json?
+  subscriptions Subscription[]
+  createdAt     DateTime        @default(now())
+  updatedAt     DateTime        @updatedAt
+}
+
+enum pricingType {
+  ONE_TIME
+  RECURRING
+}
+
+enum pricingInterval {
+  DAY
+  WEEK
+  MONTH
+  YEAR
+}
+
+model Subscription {
+  id                   Int                @id @default(autoincrement())
+  status               subscriptionStatus @default(UNPAID)
+  customer             Customer           @relation(fields: [customerId], references: [id])
+  customerId           String
+  price                Price              @relation(fields: [priceId], references: [id])
+  priceId              String
+  quantity             Int                @default(1)
+  cancelAtPeriodEnd    Boolean            @default(false)
+  currentPeriodStartAt DateTime?
+  currentPeriodEndAt   DateTime?
+  endedAt              DateTime?
+  cancelAt             DateTime?
+  canceledAat          DateTime?
+  trialStartAt         DateTime?
+  trialEndAt           DateTime?
+  stripeSubscriptionId String?            @unique
+  metaData             Json?
+  createdAt            DateTime           @default(now())
+  updatedAt            DateTime           @updatedAt
+}
+
+enum subscriptionStatus {
+  TRIALING
+  ACTIVE
+  CANCLED
+  INCOMPLETE
+  INCOMPLETE_EXPIRED
+  PAST_DUE
+  UNPAID
+}

@@ -1,0 +1,38 @@
+{
+  "name": "backend",
+  "version": "1.0.0",
+  "main": "index.js",
+  "license": "MIT",
+  "private": true,
+  "description": "NextSaaS-Backend",
+  "scripts": {
+    "start": "node dist/server",
+    "clean": "rm -rf dist",
+    "build": "npm -s run clean && npm -s run generate && tsc",
+    "generate": "pal g && prisma generate",
+    "db-dev": "prisma migrate dev",
+    "dev": "ts-node-dev --no-notify --respawn --transpile-only src/server"
+  },
+  "dependencies": {
+    "@graphql-tools/merge": "6.2.17",
+    "@paljs/plugins": "4.0.8",
+    "@prisma/client": "3.2.1",
+    "apollo-server": "2.25.2",
+    "graphql": "15.6.1",
+    "graphql-middleware": "6.1.7",
+    "graphql-type-json": "^0.3.2",
+    "stripe": "^8.179.0"
+  },
+  "devDependencies": {
+    "@paljs/cli": "4.0.12",
+    "@types/node": "15.14.9",
+    "aws-sdk": "^2.1003.0",
+    "prettier": "2.4.1",
+    "prisma": "3.2.1",
+    "ts-node": "10.2.1",
+    "ts-node-dev": "1.1.8",
+    "typescript": "4.4.3"
+  },
+  "repository": "",
+  "author": "Niranjith"
+}

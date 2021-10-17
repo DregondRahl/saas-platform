@@ -1,0 +1,3610 @@
+scalar DateTime
+
+type BatchPayload {
+  count: Int!
+}
+
+enum UserScalarFieldEnum {
+  id
+  active
+  name
+  email
+  mobile
+  cognitoUserId
+  cognitoPoolId
+  role
+  createdAt
+  updatedAt
+}
+
+enum TenantScalarFieldEnum {
+  id
+  active
+  name
+  metaData
+  createdAt
+  updatedAt
+}
+
+enum CustomerScalarFieldEnum {
+  id
+  active
+  tenantId
+  name
+  email
+  mobile
+  cognitoUserId
+  cognitoPoolId
+  stripeCustomerId
+  stripeBillingAddress
+  stripePaymentMethod
+  metaData
+  createdAt
+  updatedAt
+}
+
+enum ProductScalarFieldEnum {
+  id
+  active
+  name
+  image
+  description
+  stripeProductId
+  metaData
+  createdAt
+  updatedAt
+}
+
+enum PriceScalarFieldEnum {
+  id
+  active
+  productId
+  description
+  unitAmount
+  currency
+  type
+  interval
+  intervalCount
+  trialPeriod
+  stripePriceId
+  metaData
+  createdAt
+  updatedAt
+}
+
+enum SubscriptionScalarFieldEnum {
+  id
+  status
+  customerId
+  priceId
+  quantity
+  cancelAtPeriodEnd
+  currentPeriodStartAt
+  currentPeriodEndAt
+  endedAt
+  cancelAt
+  canceledAat
+  trialStartAt
+  trialEndAt
+  stripeSubscriptionId
+  metaData
+  createdAt
+  updatedAt
+}
+
+enum SortOrder {
+  asc
+  desc
+}
+
+enum NullableJsonNullValueInput {
+  DbNull
+  JsonNull
+}
+
+enum QueryMode {
+  default
+  insensitive
+}
+
+enum JsonNullValueFilter {
+  DbNull
+  JsonNull
+  AnyNull
+}
+
+enum UserRole {
+  ADMIN
+  ROOT
+}
+
+enum pricingType {
+  ONE_TIME
+  RECURRING
+}
+
+enum pricingInterval {
+  DAY
+  WEEK
+  MONTH
+  YEAR
+}
+
+enum subscriptionStatus {
+  TRIALING
+  ACTIVE
+  CANCLED
+  INCOMPLETE
+  INCOMPLETE_EXPIRED
+  PAST_DUE
+  UNPAID
+}
+
+input UserWhereInput {
+  AND: [UserWhereInput!]
+  OR: [UserWhereInput!]
+  NOT: [UserWhereInput!]
+  id: StringFilter
+  active: BoolFilter
+  name: StringNullableFilter
+  email: StringFilter
+  mobile: StringNullableFilter
+  cognitoUserId: StringNullableFilter
+  cognitoPoolId: StringNullableFilter
+  role: EnumUserRoleFilter
+  createdAt: DateTimeFilter
+  updatedAt: DateTimeFilter
+}
+
+input UserOrderByWithRelationInput {
+  id: SortOrder
+  active: SortOrder
+  name: SortOrder
+  email: SortOrder
+  mobile: SortOrder
+  cognitoUserId: SortOrder
+  cognitoPoolId: SortOrder
+  role: SortOrder
+  createdAt: SortOrder
+  updatedAt: SortOrder
+}
+
+input UserWhereUniqueInput {
+  id: String
+  email: String
+  cognitoUserId: String
+  cognitoPoolId: String
+}
+
+input UserOrderByWithAggregationInput {
+  id: SortOrder
+  active: SortOrder
+  name: SortOrder
+  email: SortOrder
+  mobile: SortOrder
+  cognitoUserId: SortOrder
+  cognitoPoolId: SortOrder
+  role: SortOrder
+  createdAt: SortOrder
+  updatedAt: SortOrder
+  _count: UserCountOrderByAggregateInput
+  _max: UserMaxOrderByAggregateInput
+  _min: UserMinOrderByAggregateInput
+}
+
+input UserScalarWhereWithAggregatesInput {
+  AND: [UserScalarWhereWithAggregatesInput!]
+  OR: [UserScalarWhereWithAggregatesInput!]
+  NOT: [UserScalarWhereWithAggregatesInput!]
+  id: StringWithAggregatesFilter
+  active: BoolWithAggregatesFilter
+  name: StringNullableWithAggregatesFilter
+  email: StringWithAggregatesFilter
+  mobile: StringNullableWithAggregatesFilter
+  cognitoUserId: StringNullableWithAggregatesFilter
+  cognitoPoolId: StringNullableWithAggregatesFilter
+  role: EnumUserRoleWithAggregatesFilter
+  createdAt: DateTimeWithAggregatesFilter
+  updatedAt: DateTimeWithAggregatesFilter
+}
+
+input TenantWhereInput {
+  AND: [TenantWhereInput!]
+  OR: [TenantWhereInput!]
+  NOT: [TenantWhereInput!]
+  id: StringFilter
+  active: BoolFilter
+  customer: CustomerWhereInput
+  name: StringNullableFilter
+  metaData: JsonNullableFilter
+  createdAt: DateTimeFilter
+  updatedAt: DateTimeFilter
+}
+
+input TenantOrderByWithRelationInput {
+  id: SortOrder
+  active: SortOrder
+  customer: CustomerOrderByWithRelationInput
+  name: SortOrder
+  metaData: SortOrder
+  createdAt: SortOrder
+  updatedAt: SortOrder
+}
+
+input TenantWhereUniqueInput {
+  id: String
+}
+
+input TenantOrderByWithAggregationInput {
+  id: SortOrder
+  active: SortOrder
+  name: SortOrder
+  metaData: SortOrder
+  createdAt: SortOrder
+  updatedAt: SortOrder
+  _count: TenantCountOrderByAggregateInput
+  _max: TenantMaxOrderByAggregateInput
+  _min: TenantMinOrderByAggregateInput
+}
+
+input TenantScalarWhereWithAggregatesInput {
+  AND: [TenantScalarWhereWithAggregatesInput!]
+  OR: [TenantScalarWhereWithAggregatesInput!]
+  NOT: [TenantScalarWhereWithAggregatesInput!]
+  id: StringWithAggregatesFilter
+  active: BoolWithAggregatesFilter
+  name: StringNullableWithAggregatesFilter
+  metaData: JsonNullableWithAggregatesFilter
+  createdAt: DateTimeWithAggregatesFilter
+  updatedAt: DateTimeWithAggregatesFilter
+}
+
+input CustomerWhereInput {
+  AND: [CustomerWhereInput!]
+  OR: [CustomerWhereInput!]
+  NOT: [CustomerWhereInput!]
+  id: StringFilter
+  active: BoolFilter
+  tenant: TenantWhereInput
+  tenantId: StringFilter
+  name: StringNullableFilter
+  email: StringFilter
+  mobile: StringNullableFilter
+  cognitoUserId: StringNullableFilter
+  cognitoPoolId: StringNullableFilter
+  stripeCustomerId: StringNullableFilter
+  stripeBillingAddress: JsonNullableFilter
+  stripePaymentMethod: JsonNullableFilter
+  metaData: JsonNullableFilter
+  subscriptions: SubscriptionListRelationFilter
+  createdAt: DateTimeFilter
+  updatedAt: DateTimeFilter
+}
+
+input CustomerOrderByWithRelationInput {
+  id: SortOrder
+  active: SortOrder
+  tenant: TenantOrderByWithRelationInput
+  tenantId: SortOrder
+  name: SortOrder
+  email: SortOrder
+  mobile: SortOrder
+  cognitoUserId: SortOrder
+  cognitoPoolId: SortOrder
+  stripeCustomerId: SortOrder
+  stripeBillingAddress: SortOrder
+  stripePaymentMethod: SortOrder
+  metaData: SortOrder
+  subscriptions: SubscriptionOrderByRelationAggregateInput
+  createdAt: SortOrder
+  updatedAt: SortOrder
+}
+
+input CustomerWhereUniqueInput {
+  id: String
+  tenantId: String
+  email: String
+  cognitoUserId: String
+  cognitoPoolId: String
+  stripeCustomerId: String
+}
+
+input CustomerOrderByWithAggregationInput {
+  id: SortOrder
+  active: SortOrder
+  tenantId: SortOrder
+  name: SortOrder
+  email: SortOrder
+  mobile: SortOrder
+  cognitoUserId: SortOrder
+  cognitoPoolId: SortOrder
+  stripeCustomerId: SortOrder
+  stripeBillingAddress: SortOrder
+  stripePaymentMethod: SortOrder
+  metaData: SortOrder
+  createdAt: SortOrder
+  updatedAt: SortOrder
+  _count: CustomerCountOrderByAggregateInput
+  _max: CustomerMaxOrderByAggregateInput
+  _min: CustomerMinOrderByAggregateInput
+}
+
+input CustomerScalarWhereWithAggregatesInput {
+  AND: [CustomerScalarWhereWithAggregatesInput!]
+  OR: [CustomerScalarWhereWithAggregatesInput!]
+  NOT: [CustomerScalarWhereWithAggregatesInput!]
+  id: StringWithAggregatesFilter
+  active: BoolWithAggregatesFilter
+  tenantId: StringWithAggregatesFilter
+  name: StringNullableWithAggregatesFilter
+  email: StringWithAggregatesFilter
+  mobile: StringNullableWithAggregatesFilter
+  cognitoUserId: StringNullableWithAggregatesFilter
+  cognitoPoolId: StringNullableWithAggregatesFilter
+  stripeCustomerId: StringNullableWithAggregatesFilter
+  stripeBillingAddress: JsonNullableWithAggregatesFilter
+  stripePaymentMethod: JsonNullableWithAggregatesFilter
+  metaData: JsonNullableWithAggregatesFilter
+  createdAt: DateTimeWithAggregatesFilter
+  updatedAt: DateTimeWithAggregatesFilter
+}
+
+input ProductWhereInput {
+  AND: [ProductWhereInput!]
+  OR: [ProductWhereInput!]
+  NOT: [ProductWhereInput!]
+  id: StringFilter
+  active: BoolFilter
+  name: StringNullableFilter
+  image: StringNullableFilter
+  description: StringNullableFilter
+  stripeProductId: StringNullableFilter
+  metaData: JsonNullableFilter
+  prices: PriceListRelationFilter
+  createdAt: DateTimeFilter
+  updatedAt: DateTimeFilter
+}
+
+input ProductOrderByWithRelationInput {
+  id: SortOrder
+  active: SortOrder
+  name: SortOrder
+  image: SortOrder
+  description: SortOrder
+  stripeProductId: SortOrder
+  metaData: SortOrder
+  prices: PriceOrderByRelationAggregateInput
+  createdAt: SortOrder
+  updatedAt: SortOrder
+}
+
+input ProductWhereUniqueInput {
+  id: String
+  stripeProductId: String
+}
+
+input ProductOrderByWithAggregationInput {
+  id: SortOrder
+  active: SortOrder
+  name: SortOrder
+  image: SortOrder
+  description: SortOrder
+  stripeProductId: SortOrder
+  metaData: SortOrder
+  createdAt: SortOrder
+  updatedAt: SortOrder
+  _count: ProductCountOrderByAggregateInput
+  _max: ProductMaxOrderByAggregateInput
+  _min: ProductMinOrderByAggregateInput
+}
+
+input ProductScalarWhereWithAggregatesInput {
+  AND: [ProductScalarWhereWithAggregatesInput!]
+  OR: [ProductScalarWhereWithAggregatesInput!]
+  NOT: [ProductScalarWhereWithAggregatesInput!]
+  id: StringWithAggregatesFilter
+  active: BoolWithAggregatesFilter
+  name: StringNullableWithAggregatesFilter
+  image: StringNullableWithAggregatesFilter
+  description: StringNullableWithAggregatesFilter
+  stripeProductId: StringNullableWithAggregatesFilter
+  metaData: JsonNullableWithAggregatesFilter
+  createdAt: DateTimeWithAggregatesFilter
+  updatedAt: DateTimeWithAggregatesFilter
+}
+
+input PriceWhereInput {
+  AND: [PriceWhereInput!]
+  OR: [PriceWhereInput!]
+  NOT: [PriceWhereInput!]
+  id: StringFilter
+  active: BoolFilter
+  product: ProductWhereInput
+  productId: StringFilter
+  description: StringNullableFilter
+  unitAmount: IntNullableFilter
+  currency: StringNullableFilter
+  type: EnumpricingTypeFilter
+  interval: EnumpricingIntervalFilter
+  intervalCount: IntNullableFilter
+  trialPeriod: IntNullableFilter
+  stripePriceId: StringNullableFilter
+  metaData: JsonNullableFilter
+  subscriptions: SubscriptionListRelationFilter
+  createdAt: DateTimeFilter
+  updatedAt: DateTimeFilter
+}
+
+input PriceOrderByWithRelationInput {
+  id: SortOrder
+  active: SortOrder
+  product: ProductOrderByWithRelationInput
+  productId: SortOrder
+  description: SortOrder
+  unitAmount: SortOrder
+  currency: SortOrder
+  type: SortOrder
+  interval: SortOrder
+  intervalCount: SortOrder
+  trialPeriod: SortOrder
+  stripePriceId: SortOrder
+  metaData: SortOrder
+  subscriptions: SubscriptionOrderByRelationAggregateInput
+  createdAt: SortOrder
+  updatedAt: SortOrder
+}
+
+input PriceWhereUniqueInput {
+  id: String
+  stripePriceId: String
+}
+
+input PriceOrderByWithAggregationInput {
+  id: SortOrder
+  active: SortOrder
+  productId: SortOrder
+  description: SortOrder
+  unitAmount: SortOrder
+  currency: SortOrder
+  type: SortOrder
+  interval: SortOrder
+  intervalCount: SortOrder
+  trialPeriod: SortOrder
+  stripePriceId: SortOrder
+  metaData: SortOrder
+  createdAt: SortOrder
+  updatedAt: SortOrder
+  _count: PriceCountOrderByAggregateInput
+  _avg: PriceAvgOrderByAggregateInput
+  _max: PriceMaxOrderByAggregateInput
+  _min: PriceMinOrderByAggregateInput
+  _sum: PriceSumOrderByAggregateInput
+}
+
+input PriceScalarWhereWithAggregatesInput {
+  AND: [PriceScalarWhereWithAggregatesInput!]
+  OR: [PriceScalarWhereWithAggregatesInput!]
+  NOT: [PriceScalarWhereWithAggregatesInput!]
+  id: StringWithAggregatesFilter
+  active: BoolWithAggregatesFilter
+  productId: StringWithAggregatesFilter
+  description: StringNullableWithAggregatesFilter
+  unitAmount: IntNullableWithAggregatesFilter
+  currency: StringNullableWithAggregatesFilter
+  type: EnumpricingTypeWithAggregatesFilter
+  interval: EnumpricingIntervalWithAggregatesFilter
+  intervalCount: IntNullableWithAggregatesFilter
+  trialPeriod: IntNullableWithAggregatesFilter
+  stripePriceId: StringNullableWithAggregatesFilter
+  metaData: JsonNullableWithAggregatesFilter
+  createdAt: DateTimeWithAggregatesFilter
+  updatedAt: DateTimeWithAggregatesFilter
+}
+
+input SubscriptionWhereInput {
+  AND: [SubscriptionWhereInput!]
+  OR: [SubscriptionWhereInput!]
+  NOT: [SubscriptionWhereInput!]
+  id: IntFilter
+  status: EnumsubscriptionStatusFilter
+  customer: CustomerWhereInput
+  customerId: StringFilter
+  price: PriceWhereInput
+  priceId: StringFilter
+  quantity: IntFilter
+  cancelAtPeriodEnd: BoolFilter
+  currentPeriodStartAt: DateTimeNullableFilter
+  currentPeriodEndAt: DateTimeNullableFilter
+  endedAt: DateTimeNullableFilter
+  cancelAt: DateTimeNullableFilter
+  canceledAat: DateTimeNullableFilter
+  trialStartAt: DateTimeNullableFilter
+  trialEndAt: DateTimeNullableFilter
+  stripeSubscriptionId: StringNullableFilter
+  metaData: JsonNullableFilter
+  createdAt: DateTimeFilter
+  updatedAt: DateTimeFilter
+}
+
+input SubscriptionOrderByWithRelationInput {
+  id: SortOrder
+  status: SortOrder
+  customer: CustomerOrderByWithRelationInput
+  customerId: SortOrder
+  price: PriceOrderByWithRelationInput
+  priceId: SortOrder
+  quantity: SortOrder
+  cancelAtPeriodEnd: SortOrder
+  currentPeriodStartAt: SortOrder
+  currentPeriodEndAt: SortOrder
+  endedAt: SortOrder
+  cancelAt: SortOrder
+  canceledAat: SortOrder
+  trialStartAt: SortOrder
+  trialEndAt: SortOrder
+  stripeSubscriptionId: SortOrder
+  metaData: SortOrder
+  createdAt: SortOrder
+  updatedAt: SortOrder
+}
+
+input SubscriptionWhereUniqueInput {
+  id: Int
+  stripeSubscriptionId: String
+}
+
+input SubscriptionOrderByWithAggregationInput {
+  id: SortOrder
+  status: SortOrder
+  customerId: SortOrder
+  priceId: SortOrder
+  quantity: SortOrder
+  cancelAtPeriodEnd: SortOrder
+  currentPeriodStartAt: SortOrder
+  currentPeriodEndAt: SortOrder
+  endedAt: SortOrder
+  cancelAt: SortOrder
+  canceledAat: SortOrder
+  trialStartAt: SortOrder
+  trialEndAt: SortOrder
+  stripeSubscriptionId: SortOrder
+  metaData: SortOrder
+  createdAt: SortOrder
+  updatedAt: SortOrder
+  _count: SubscriptionCountOrderByAggregateInput
+  _avg: SubscriptionAvgOrderByAggregateInput
+  _max: SubscriptionMaxOrderByAggregateInput
+  _min: SubscriptionMinOrderByAggregateInput
+  _sum: SubscriptionSumOrderByAggregateInput
+}
+
+input SubscriptionScalarWhereWithAggregatesInput {
+  AND: [SubscriptionScalarWhereWithAggregatesInput!]
+  OR: [SubscriptionScalarWhereWithAggregatesInput!]
+  NOT: [SubscriptionScalarWhereWithAggregatesInput!]
+  id: IntWithAggregatesFilter
+  status: EnumsubscriptionStatusWithAggregatesFilter
+  customerId: StringWithAggregatesFilter
+  priceId: StringWithAggregatesFilter
+  quantity: IntWithAggregatesFilter
+  cancelAtPeriodEnd: BoolWithAggregatesFilter
+  currentPeriodStartAt: DateTimeNullableWithAggregatesFilter
+  currentPeriodEndAt: DateTimeNullableWithAggregatesFilter
+  endedAt: DateTimeNullableWithAggregatesFilter
+  cancelAt: DateTimeNullableWithAggregatesFilter
+  canceledAat: DateTimeNullableWithAggregatesFilter
+  trialStartAt: DateTimeNullableWithAggregatesFilter
+  trialEndAt: DateTimeNullableWithAggregatesFilter
+  stripeSubscriptionId: StringNullableWithAggregatesFilter
+  metaData: JsonNullableWithAggregatesFilter
+  createdAt: DateTimeWithAggregatesFilter
+  updatedAt: DateTimeWithAggregatesFilter
+}
+
+input UserCreateInput {
+  id: String
+  active: Boolean
+  name: String
+  email: String!
+  mobile: String
+  cognitoUserId: String
+  cognitoPoolId: String
+  role: UserRole
+  createdAt: DateTime
+  updatedAt: DateTime
+}
+
+input UserUncheckedCreateInput {
+  id: String
+  active: Boolean
+  name: String
+  email: String!
+  mobile: String
+  cognitoUserId: String
+  cognitoPoolId: String
+  role: UserRole
+  createdAt: DateTime
+  updatedAt: DateTime
+}
+
+input UserUpdateInput {
+  id: StringFieldUpdateOperationsInput
+  active: BoolFieldUpdateOperationsInput
+  name: NullableStringFieldUpdateOperationsInput
+  email: StringFieldUpdateOperationsInput
+  mobile: NullableStringFieldUpdateOperationsInput
+  cognitoUserId: NullableStringFieldUpdateOperationsInput
+  cognitoPoolId: NullableStringFieldUpdateOperationsInput
+  role: EnumUserRoleFieldUpdateOperationsInput
+  createdAt: DateTimeFieldUpdateOperationsInput
+  updatedAt: DateTimeFieldUpdateOperationsInput
+}
+
+input UserUncheckedUpdateInput {
+  id: StringFieldUpdateOperationsInput
+  active: BoolFieldUpdateOperationsInput
+  name: NullableStringFieldUpdateOperationsInput
+  email: StringFieldUpdateOperationsInput
+  mobile: NullableStringFieldUpdateOperationsInput
+  cognitoUserId: NullableStringFieldUpdateOperationsInput
+  cognitoPoolId: NullableStringFieldUpdateOperationsInput
+  role: EnumUserRoleFieldUpdateOperationsInput
+  createdAt: DateTimeFieldUpdateOperationsInput
+  updatedAt: DateTimeFieldUpdateOperationsInput
+}
+
+input UserCreateManyInput {
+  id: String
+  active: Boolean
+  name: String
+  email: String!
+  mobile: String
+  cognitoUserId: String
+  cognitoPoolId: String
+  role: UserRole
+  createdAt: DateTime
+  updatedAt: DateTime
+}
+
+input UserUpdateManyMutationInput {
+  id: StringFieldUpdateOperationsInput
+  active: BoolFieldUpdateOperationsInput
+  name: NullableStringFieldUpdateOperationsInput
+  email: StringFieldUpdateOperationsInput
+  mobile: NullableStringFieldUpdateOperationsInput
+  cognitoUserId: NullableStringFieldUpdateOperationsInput
+  cognitoPoolId: NullableStringFieldUpdateOperationsInput
+  role: EnumUserRoleFieldUpdateOperationsInput
+  createdAt: DateTimeFieldUpdateOperationsInput
+  updatedAt: DateTimeFieldUpdateOperationsInput
+}
+
+input UserUncheckedUpdateManyInput {
+  id: StringFieldUpdateOperationsInput
+  active: BoolFieldUpdateOperationsInput
+  name: NullableStringFieldUpdateOperationsInput
+  email: StringFieldUpdateOperationsInput
+  mobile: NullableStringFieldUpdateOperationsInput
+  cognitoUserId: NullableStringFieldUpdateOperationsInput
+  cognitoPoolId: NullableStringFieldUpdateOperationsInput
+  role: EnumUserRoleFieldUpdateOperationsInput
+  createdAt: DateTimeFieldUpdateOperationsInput
+  updatedAt: DateTimeFieldUpdateOperationsInput
+}
+
+input TenantCreateInput {
+  id: String
+  active: Boolean
+  name: String
+  metaData: Json
+  createdAt: DateTime
+  updatedAt: DateTime
+  customer: CustomerCreateNestedOneWithoutTenantInput
+}
+
+input TenantUncheckedCreateInput {
+  id: String
+  active: Boolean
+  name: String
+  metaData: Json
+  createdAt: DateTime
+  updatedAt: DateTime
+  customer: CustomerUncheckedCreateNestedOneWithoutTenantInput
+}
+
+input TenantUpdateInput {
+  id: StringFieldUpdateOperationsInput
+  active: BoolFieldUpdateOperationsInput
+  name: NullableStringFieldUpdateOperationsInput
+  metaData: Json
+  createdAt: DateTimeFieldUpdateOperationsInput
+  updatedAt: DateTimeFieldUpdateOperationsInput
+  customer: CustomerUpdateOneWithoutTenantInput
+}
+
+input TenantUncheckedUpdateInput {
+  id: StringFieldUpdateOperationsInput
+  active: BoolFieldUpdateOperationsInput
+  name: NullableStringFieldUpdateOperationsInput
+  metaData: Json
+  createdAt: DateTimeFieldUpdateOperationsInput
+  updatedAt: DateTimeFieldUpdateOperationsInput
+  customer: CustomerUncheckedUpdateOneWithoutTenantInput
+}
+
+input TenantCreateManyInput {
+  id: String
+  active: Boolean
+  name: String
+  metaData: Json
+  createdAt: DateTime
+  updatedAt: DateTime
+}
+
+input TenantUpdateManyMutationInput {
+  id: StringFieldUpdateOperationsInput
+  active: BoolFieldUpdateOperationsInput
+  name: NullableStringFieldUpdateOperationsInput
+  metaData: Json
+  createdAt: DateTimeFieldUpdateOperationsInput
+  updatedAt: DateTimeFieldUpdateOperationsInput
+}
+
+input TenantUncheckedUpdateManyInput {
+  id: StringFieldUpdateOperationsInput
+  active: BoolFieldUpdateOperationsInput
+  name: NullableStringFieldUpdateOperationsInput
+  metaData: Json
+  createdAt: DateTimeFieldUpdateOperationsInput
+  updatedAt: DateTimeFieldUpdateOperationsInput
+}
+
+input CustomerCreateInput {
+  id: String
+  active: Boolean
+  name: String
+  email: String!
+  mobile: String
+  cognitoUserId: String
+  cognitoPoolId: String
+  stripeCustomerId: String
+  stripeBillingAddress: Json
+  stripePaymentMethod: Json
+  metaData: Json
+  createdAt: DateTime
+  updatedAt: DateTime
+  tenant: TenantCreateNestedOneWithoutCustomerInput!
+  subscriptions: SubscriptionCreateNestedManyWithoutCustomerInput
+}
+
+input CustomerUncheckedCreateInput {
+  id: String
+  active: Boolean
+  tenantId: String!
+  name: String
+  email: String!
+  mobile: String
+  cognitoUserId: String
+  cognitoPoolId: String
+  stripeCustomerId: String
+  stripeBillingAddress: Json
+  stripePaymentMethod: Json
+  metaData: Json
+  createdAt: DateTime
+  updatedAt: DateTime
+  subscriptions: SubscriptionUncheckedCreateNestedManyWithoutCustomerInput
+}
+
+input CustomerUpdateInput {
+  id: StringFieldUpdateOperationsInput
+  active: BoolFieldUpdateOperationsInput
+  name: NullableStringFieldUpdateOperationsInput
+  email: StringFieldUpdateOperationsInput
+  mobile: NullableStringFieldUpdateOperationsInput
+  cognitoUserId: NullableStringFieldUpdateOperationsInput
+  cognitoPoolId: NullableStringFieldUpdateOperationsInput
+  stripeCustomerId: NullableStringFieldUpdateOperationsInput
+  stripeBillingAddress: Json
+  stripePaymentMethod: Json
+  metaData: Json
+  createdAt: DateTimeFieldUpdateOperationsInput
+  updatedAt: DateTimeFieldUpdateOperationsInput
+  tenant: TenantUpdateOneRequiredWithoutCustomerInput
+  subscriptions: SubscriptionUpdateManyWithoutCustomerInput
+}
+
+input CustomerUncheckedUpdateInput {
+  id: StringFieldUpdateOperationsInput
+  active: BoolFieldUpdateOperationsInput
+  tenantId: StringFieldUpdateOperationsInput
+  name: NullableStringFieldUpdateOperationsInput
+  email: StringFieldUpdateOperationsInput
+  mobile: NullableStringFieldUpdateOperationsInput
+  cognitoUserId: NullableStringFieldUpdateOperationsInput
+  cognitoPoolId: NullableStringFieldUpdateOperationsInput
+  stripeCustomerId: NullableStringFieldUpdateOperationsInput
+  stripeBillingAddress: Json
+  stripePaymentMethod: Json
+  metaData: Json
+  createdAt: DateTimeFieldUpdateOperationsInput
+  updatedAt: DateTimeFieldUpdateOperationsInput
+  subscriptions: SubscriptionUncheckedUpdateManyWithoutCustomerInput
+}
+
+input CustomerCreateManyInput {
+  id: String
+  active: Boolean
+  tenantId: String!
+  name: String
+  email: String!
+  mobile: String
+  cognitoUserId: String
+  cognitoPoolId: String
+  stripeCustomerId: String
+  stripeBillingAddress: Json
+  stripePaymentMethod: Json
+  metaData: Json
+  createdAt: DateTime
+  updatedAt: DateTime
+}
+
+input CustomerUpdateManyMutationInput {
+  id: StringFieldUpdateOperationsInput
+  active: BoolFieldUpdateOperationsInput
+  name: NullableStringFieldUpdateOperationsInput
+  email: StringFieldUpdateOperationsInput
+  mobile: NullableStringFieldUpdateOperationsInput
+  cognitoUserId: NullableStringFieldUpdateOperationsInput
+  cognitoPoolId: NullableStringFieldUpdateOperationsInput
+  stripeCustomerId: NullableStringFieldUpdateOperationsInput
+  stripeBillingAddress: Json
+  stripePaymentMethod: Json
+  metaData: Json
+  createdAt: DateTimeFieldUpdateOperationsInput
+  updatedAt: DateTimeFieldUpdateOperationsInput
+}
+
+input CustomerUncheckedUpdateManyInput {
+  id: StringFieldUpdateOperationsInput
+  active: BoolFieldUpdateOperationsInput
+  tenantId: StringFieldUpdateOperationsInput
+  name: NullableStringFieldUpdateOperationsInput
+  email: StringFieldUpdateOperationsInput
+  mobile: NullableStringFieldUpdateOperationsInput
+  cognitoUserId: NullableStringFieldUpdateOperationsInput
+  cognitoPoolId: NullableStringFieldUpdateOperationsInput
+  stripeCustomerId: NullableStringFieldUpdateOperationsInput
+  stripeBillingAddress: Json
+  stripePaymentMethod: Json
+  metaData: Json
+  createdAt: DateTimeFieldUpdateOperationsInput
+  updatedAt: DateTimeFieldUpdateOperationsInput
+}
+
+input ProductCreateInput {
+  id: String
+  active: Boolean
+  name: String
+  image: String
+  description: String
+  stripeProductId: String
+  metaData: Json
+  createdAt: DateTime
+  updatedAt: DateTime
+  prices: PriceCreateNestedManyWithoutProductInput
+}
+
+input ProductUncheckedCreateInput {
+  id: String
+  active: Boolean
+  name: String
+  image: String
+  description: String
+  stripeProductId: String
+  metaData: Json
+  createdAt: DateTime
+  updatedAt: DateTime
+  prices: PriceUncheckedCreateNestedManyWithoutProductInput
+}
+
+input ProductUpdateInput {
+  id: StringFieldUpdateOperationsInput
+  active: BoolFieldUpdateOperationsInput
+  name: NullableStringFieldUpdateOperationsInput
+  image: NullableStringFieldUpdateOperationsInput
+  description: NullableStringFieldUpdateOperationsInput
+  stripeProductId: NullableStringFieldUpdateOperationsInput
+  metaData: Json
+  createdAt: DateTimeFieldUpdateOperationsInput
+  updatedAt: DateTimeFieldUpdateOperationsInput
+  prices: PriceUpdateManyWithoutProductInput
+}
+
+input ProductUncheckedUpdateInput {
+  id: StringFieldUpdateOperationsInput
+  active: BoolFieldUpdateOperationsInput
+  name: NullableStringFieldUpdateOperationsInput
+  image: NullableStringFieldUpdateOperationsInput
+  description: NullableStringFieldUpdateOperationsInput
+  stripeProductId: NullableStringFieldUpdateOperationsInput
+  metaData: Json
+  createdAt: DateTimeFieldUpdateOperationsInput
+  updatedAt: DateTimeFieldUpdateOperationsInput
+  prices: PriceUncheckedUpdateManyWithoutProductInput
+}
+
+input ProductCreateManyInput {
+  id: String
+  active: Boolean
+  name: String
+  image: String
+  description: String
+  stripeProductId: String
+  metaData: Json
+  createdAt: DateTime
+  updatedAt: DateTime
+}
+
+input ProductUpdateManyMutationInput {
+  id: StringFieldUpdateOperationsInput
+  active: BoolFieldUpdateOperationsInput
+  name: NullableStringFieldUpdateOperationsInput
+  image: NullableStringFieldUpdateOperationsInput
+  description: NullableStringFieldUpdateOperationsInput
+  stripeProductId: NullableStringFieldUpdateOperationsInput
+  metaData: Json
+  createdAt: DateTimeFieldUpdateOperationsInput
+  updatedAt: DateTimeFieldUpdateOperationsInput
+}
+
+input ProductUncheckedUpdateManyInput {
+  id: StringFieldUpdateOperationsInput
+  active: BoolFieldUpdateOperationsInput
+  name: NullableStringFieldUpdateOperationsInput
+  image: NullableStringFieldUpdateOperationsInput
+  description: NullableStringFieldUpdateOperationsInput
+  stripeProductId: NullableStringFieldUpdateOperationsInput
+  metaData: Json
+  createdAt: DateTimeFieldUpdateOperationsInput
+  updatedAt: DateTimeFieldUpdateOperationsInput
+}
+
+input PriceCreateInput {
+  id: String
+  active: Boolean
+  description: String
+  unitAmount: Int
+  currency: String
+  type: pricingType
+  interval: pricingInterval
+  intervalCount: Int
+  trialPeriod: Int
+  stripePriceId: String
+  metaData: Json
+  createdAt: DateTime
+  updatedAt: DateTime
+  product: ProductCreateNestedOneWithoutPricesInput!
+  subscriptions: SubscriptionCreateNestedManyWithoutPriceInput
+}
+
+input PriceUncheckedCreateInput {
+  id: String
+  active: Boolean
+  productId: String!
+  description: String
+  unitAmount: Int
+  currency: String
+  type: pricingType
+  interval: pricingInterval
+  intervalCount: Int
+  trialPeriod: Int
+  stripePriceId: String
+  metaData: Json
+  createdAt: DateTime
+  updatedAt: DateTime
+  subscriptions: SubscriptionUncheckedCreateNestedManyWithoutPriceInput
+}
+
+input PriceUpdateInput {
+  id: StringFieldUpdateOperationsInput
+  active: BoolFieldUpdateOperationsInput
+  description: NullableStringFieldUpdateOperationsInput
+  unitAmount: NullableIntFieldUpdateOperationsInput
+  currency: NullableStringFieldUpdateOperationsInput
+  type: EnumpricingTypeFieldUpdateOperationsInput
+  interval: EnumpricingIntervalFieldUpdateOperationsInput
+  intervalCount: NullableIntFieldUpdateOperationsInput
+  trialPeriod: NullableIntFieldUpdateOperationsInput
+  stripePriceId: NullableStringFieldUpdateOperationsInput
+  metaData: Json
+  createdAt: DateTimeFieldUpdateOperationsInput
+  updatedAt: DateTimeFieldUpdateOperationsInput
+  product: ProductUpdateOneRequiredWithoutPricesInput
+  subscriptions: SubscriptionUpdateManyWithoutPriceInput
+}
+
+input PriceUncheckedUpdateInput {
+  id: StringFieldUpdateOperationsInput
+  active: BoolFieldUpdateOperationsInput
+  productId: StringFieldUpdateOperationsInput
+  description: NullableStringFieldUpdateOperationsInput
+  unitAmount: NullableIntFieldUpdateOperationsInput
+  currency: NullableStringFieldUpdateOperationsInput
+  type: EnumpricingTypeFieldUpdateOperationsInput
+  interval: EnumpricingIntervalFieldUpdateOperationsInput
+  intervalCount: NullableIntFieldUpdateOperationsInput
+  trialPeriod: NullableIntFieldUpdateOperationsInput
+  stripePriceId: NullableStringFieldUpdateOperationsInput
+  metaData: Json
+  createdAt: DateTimeFieldUpdateOperationsInput
+  updatedAt: DateTimeFieldUpdateOperationsInput
+  subscriptions: SubscriptionUncheckedUpdateManyWithoutPriceInput
+}
+
+input PriceCreateManyInput {
+  id: String
+  active: Boolean
+  productId: String!
+  description: String
+  unitAmount: Int
+  currency: String
+  type: pricingType
+  interval: pricingInterval
+  intervalCount: Int
+  trialPeriod: Int
+  stripePriceId: String
+  metaData: Json
+  createdAt: DateTime
+  updatedAt: DateTime
+}
+
+input PriceUpdateManyMutationInput {
+  id: StringFieldUpdateOperationsInput
+  active: BoolFieldUpdateOperationsInput
+  description: NullableStringFieldUpdateOperationsInput
+  unitAmount: NullableIntFieldUpdateOperationsInput
+  currency: NullableStringFieldUpdateOperationsInput
+  type: EnumpricingTypeFieldUpdateOperationsInput
+  interval: EnumpricingIntervalFieldUpdateOperationsInput
+  intervalCount: NullableIntFieldUpdateOperationsInput
+  trialPeriod: NullableIntFieldUpdateOperationsInput
+  stripePriceId: NullableStringFieldUpdateOperationsInput
+  metaData: Json
+  createdAt: DateTimeFieldUpdateOperationsInput
+  updatedAt: DateTimeFieldUpdateOperationsInput
+}
+
+input PriceUncheckedUpdateManyInput {
+  id: StringFieldUpdateOperationsInput
+  active: BoolFieldUpdateOperationsInput
+  productId: StringFieldUpdateOperationsInput
+  description: NullableStringFieldUpdateOperationsInput
+  unitAmount: NullableIntFieldUpdateOperationsInput
+  currency: NullableStringFieldUpdateOperationsInput
+  type: EnumpricingTypeFieldUpdateOperationsInput
+  interval: EnumpricingIntervalFieldUpdateOperationsInput
+  intervalCount: NullableIntFieldUpdateOperationsInput
+  trialPeriod: NullableIntFieldUpdateOperationsInput
+  stripePriceId: NullableStringFieldUpdateOperationsInput
+  metaData: Json
+  createdAt: DateTimeFieldUpdateOperationsInput
+  updatedAt: DateTimeFieldUpdateOperationsInput
+}
+
+input SubscriptionCreateInput {
+  status: subscriptionStatus
+  quantity: Int
+  cancelAtPeriodEnd: Boolean
+  currentPeriodStartAt: DateTime
+  currentPeriodEndAt: DateTime
+  endedAt: DateTime
+  cancelAt: DateTime
+  canceledAat: DateTime
+  trialStartAt: DateTime
+  trialEndAt: DateTime
+  stripeSubscriptionId: String
+  metaData: Json
+  createdAt: DateTime
+  updatedAt: DateTime
+  customer: CustomerCreateNestedOneWithoutSubscriptionsInput!
+  price: PriceCreateNestedOneWithoutSubscriptionsInput!
+}
+
+input SubscriptionUncheckedCreateInput {
+  id: Int
+  status: subscriptionStatus
+  customerId: String!
+  priceId: String!
+  quantity: Int
+  cancelAtPeriodEnd: Boolean
+  currentPeriodStartAt: DateTime
+  currentPeriodEndAt: DateTime
+  endedAt: DateTime
+  cancelAt: DateTime
+  canceledAat: DateTime
+  trialStartAt: DateTime
+  trialEndAt: DateTime
+  stripeSubscriptionId: String
+  metaData: Json
+  createdAt: DateTime
+  updatedAt: DateTime
+}
+
+input SubscriptionUpdateInput {
+  status: EnumsubscriptionStatusFieldUpdateOperationsInput
+  quantity: IntFieldUpdateOperationsInput
+  cancelAtPeriodEnd: BoolFieldUpdateOperationsInput
+  currentPeriodStartAt: NullableDateTimeFieldUpdateOperationsInput
+  currentPeriodEndAt: NullableDateTimeFieldUpdateOperationsInput
+  endedAt: NullableDateTimeFieldUpdateOperationsInput
+  cancelAt: NullableDateTimeFieldUpdateOperationsInput
+  canceledAat: NullableDateTimeFieldUpdateOperationsInput
+  trialStartAt: NullableDateTimeFieldUpdateOperationsInput
+  trialEndAt: NullableDateTimeFieldUpdateOperationsInput
+  stripeSubscriptionId: NullableStringFieldUpdateOperationsInput
+  metaData: Json
+  createdAt: DateTimeFieldUpdateOperationsInput
+  updatedAt: DateTimeFieldUpdateOperationsInput
+  customer: CustomerUpdateOneRequiredWithoutSubscriptionsInput
+  price: PriceUpdateOneRequiredWithoutSubscriptionsInput
+}
+
+input SubscriptionUncheckedUpdateInput {
+  id: IntFieldUpdateOperationsInput
+  status: EnumsubscriptionStatusFieldUpdateOperationsInput
+  customerId: StringFieldUpdateOperationsInput
+  priceId: StringFieldUpdateOperationsInput
+  quantity: IntFieldUpdateOperationsInput
+  cancelAtPeriodEnd: BoolFieldUpdateOperationsInput
+  currentPeriodStartAt: NullableDateTimeFieldUpdateOperationsInput
+  currentPeriodEndAt: NullableDateTimeFieldUpdateOperationsInput
+  endedAt: NullableDateTimeFieldUpdateOperationsInput
+  cancelAt: NullableDateTimeFieldUpdateOperationsInput
+  canceledAat: NullableDateTimeFieldUpdateOperationsInput
+  trialStartAt: NullableDateTimeFieldUpdateOperationsInput
+  trialEndAt: NullableDateTimeFieldUpdateOperationsInput
+  stripeSubscriptionId: NullableStringFieldUpdateOperationsInput
+  metaData: Json
+  createdAt: DateTimeFieldUpdateOperationsInput
+  updatedAt: DateTimeFieldUpdateOperationsInput
+}
+
+input SubscriptionCreateManyInput {
+  id: Int
+  status: subscriptionStatus
+  customerId: String!
+  priceId: String!
+  quantity: Int
+  cancelAtPeriodEnd: Boolean
+  currentPeriodStartAt: DateTime
+  currentPeriodEndAt: DateTime
+  endedAt: DateTime
+  cancelAt: DateTime
+  canceledAat: DateTime
+  trialStartAt: DateTime
+  trialEndAt: DateTime
+  stripeSubscriptionId: String
+  metaData: Json
+  createdAt: DateTime
+  updatedAt: DateTime
+}
+
+input SubscriptionUpdateManyMutationInput {
+  status: EnumsubscriptionStatusFieldUpdateOperationsInput
+  quantity: IntFieldUpdateOperationsInput
+  cancelAtPeriodEnd: BoolFieldUpdateOperationsInput
+  currentPeriodStartAt: NullableDateTimeFieldUpdateOperationsInput
+  currentPeriodEndAt: NullableDateTimeFieldUpdateOperationsInput
+  endedAt: NullableDateTimeFieldUpdateOperationsInput
+  cancelAt: NullableDateTimeFieldUpdateOperationsInput
+  canceledAat: NullableDateTimeFieldUpdateOperationsInput
+  trialStartAt: NullableDateTimeFieldUpdateOperationsInput
+  trialEndAt: NullableDateTimeFieldUpdateOperationsInput
+  stripeSubscriptionId: NullableStringFieldUpdateOperationsInput
+  metaData: Json
+  createdAt: DateTimeFieldUpdateOperationsInput
+  updatedAt: DateTimeFieldUpdateOperationsInput
+}
+
+input SubscriptionUncheckedUpdateManyInput {
+  id: IntFieldUpdateOperationsInput
+  status: EnumsubscriptionStatusFieldUpdateOperationsInput
+  customerId: StringFieldUpdateOperationsInput
+  priceId: StringFieldUpdateOperationsInput
+  quantity: IntFieldUpdateOperationsInput
+  cancelAtPeriodEnd: BoolFieldUpdateOperationsInput
+  currentPeriodStartAt: NullableDateTimeFieldUpdateOperationsInput
+  currentPeriodEndAt: NullableDateTimeFieldUpdateOperationsInput
+  endedAt: NullableDateTimeFieldUpdateOperationsInput
+  cancelAt: NullableDateTimeFieldUpdateOperationsInput
+  canceledAat: NullableDateTimeFieldUpdateOperationsInput
+  trialStartAt: NullableDateTimeFieldUpdateOperationsInput
+  trialEndAt: NullableDateTimeFieldUpdateOperationsInput
+  stripeSubscriptionId: NullableStringFieldUpdateOperationsInput
+  metaData: Json
+  createdAt: DateTimeFieldUpdateOperationsInput
+  updatedAt: DateTimeFieldUpdateOperationsInput
+}
+
+input StringFilter {
+  equals: String
+  in: [String!]
+  notIn: [String!]
+  lt: String
+  lte: String
+  gt: String
+  gte: String
+  contains: String
+  startsWith: String
+  endsWith: String
+  mode: QueryMode
+  not: NestedStringFilter
+}
+
+input BoolFilter {
+  equals: Boolean
+  not: NestedBoolFilter
+}
+
+input StringNullableFilter {
+  equals: String
+  in: [String!]
+  notIn: [String!]
+  lt: String
+  lte: String
+  gt: String
+  gte: String
+  contains: String
+  startsWith: String
+  endsWith: String
+  mode: QueryMode
+  not: NestedStringNullableFilter
+}
+
+input EnumUserRoleFilter {
+  equals: UserRole
+  in: [UserRole!]
+  notIn: [UserRole!]
+  not: NestedEnumUserRoleFilter
+}
+
+input DateTimeFilter {
+  equals: DateTime
+  in: [DateTime!]
+  notIn: [DateTime!]
+  lt: DateTime
+  lte: DateTime
+  gt: DateTime
+  gte: DateTime
+  not: NestedDateTimeFilter
+}
+
+input UserCountOrderByAggregateInput {
+  id: SortOrder
+  active: SortOrder
+  name: SortOrder
+  email: SortOrder
+  mobile: SortOrder
+  cognitoUserId: SortOrder
+  cognitoPoolId: SortOrder
+  role: SortOrder
+  createdAt: SortOrder
+  updatedAt: SortOrder
+}
+
+input UserMaxOrderByAggregateInput {
+  id: SortOrder
+  active: SortOrder
+  name: SortOrder
+  email: SortOrder
+  mobile: SortOrder
+  cognitoUserId: SortOrder
+  cognitoPoolId: SortOrder
+  role: SortOrder
+  createdAt: SortOrder
+  updatedAt: SortOrder
+}
+
+input UserMinOrderByAggregateInput {
+  id: SortOrder
+  active: SortOrder
+  name: SortOrder
+  email: SortOrder
+  mobile: SortOrder
+  cognitoUserId: SortOrder
+  cognitoPoolId: SortOrder
+  role: SortOrder
+  createdAt: SortOrder
+  updatedAt: SortOrder
+}
+
+input StringWithAggregatesFilter {
+  equals: String
+  in: [String!]
+  notIn: [String!]
+  lt: String
+  lte: String
+  gt: String
+  gte: String
+  contains: String
+  startsWith: String
+  endsWith: String
+  mode: QueryMode
+  not: NestedStringWithAggregatesFilter
+  _count: NestedIntFilter
+  _min: NestedStringFilter
+  _max: NestedStringFilter
+}
+
+input BoolWithAggregatesFilter {
+  equals: Boolean
+  not: NestedBoolWithAggregatesFilter
+  _count: NestedIntFilter
+  _min: NestedBoolFilter
+  _max: NestedBoolFilter
+}
+
+input StringNullableWithAggregatesFilter {
+  equals: String
+  in: [String!]
+  notIn: [String!]
+  lt: String
+  lte: String
+  gt: String
+  gte: String
+  contains: String
+  startsWith: String
+  endsWith: String
+  mode: QueryMode
+  not: NestedStringNullableWithAggregatesFilter
+  _count: NestedIntNullableFilter
+  _min: NestedStringNullableFilter
+  _max: NestedStringNullableFilter
+}
+
+input EnumUserRoleWithAggregatesFilter {
+  equals: UserRole
+  in: [UserRole!]
+  notIn: [UserRole!]
+  not: NestedEnumUserRoleWithAggregatesFilter
+  _count: NestedIntFilter
+  _min: NestedEnumUserRoleFilter
+  _max: NestedEnumUserRoleFilter
+}
+
+input DateTimeWithAggregatesFilter {
+  equals: DateTime
+  in: [DateTime!]
+  notIn: [DateTime!]
+  lt: DateTime
+  lte: DateTime
+  gt: DateTime
+  gte: DateTime
+  not: NestedDateTimeWithAggregatesFilter
+  _count: NestedIntFilter
+  _min: NestedDateTimeFilter
+  _max: NestedDateTimeFilter
+}
+
+input CustomerRelationFilter {
+  is: CustomerWhereInput
+  isNot: CustomerWhereInput
+}
+
+input JsonNullableFilter {
+  equals: Json
+  not: Json
+}
+
+input TenantCountOrderByAggregateInput {
+  id: SortOrder
+  active: SortOrder
+  name: SortOrder
+  metaData: SortOrder
+  createdAt: SortOrder
+  updatedAt: SortOrder
+}
+
+input TenantMaxOrderByAggregateInput {
+  id: SortOrder
+  active: SortOrder
+  name: SortOrder
+  createdAt: SortOrder
+  updatedAt: SortOrder
+}
+
+input TenantMinOrderByAggregateInput {
+  id: SortOrder
+  active: SortOrder
+  name: SortOrder
+  createdAt: SortOrder
+  updatedAt: SortOrder
+}
+
+input JsonNullableWithAggregatesFilter {
+  equals: Json
+  not: Json
+  _count: NestedIntNullableFilter
+  _min: NestedJsonNullableFilter
+  _max: NestedJsonNullableFilter
+}
+
+input TenantRelationFilter {
+  is: TenantWhereInput
+  isNot: TenantWhereInput
+}
+
+input SubscriptionListRelationFilter {
+  every: SubscriptionWhereInput
+  some: SubscriptionWhereInput
+  none: SubscriptionWhereInput
+}
+
+input SubscriptionOrderByRelationAggregateInput {
+  _count: SortOrder
+}
+
+input CustomerCountOrderByAggregateInput {
+  id: SortOrder
+  active: SortOrder
+  tenantId: SortOrder
+  name: SortOrder
+  email: SortOrder
+  mobile: SortOrder
+  cognitoUserId: SortOrder
+  cognitoPoolId: SortOrder
+  stripeCustomerId: SortOrder
+  stripeBillingAddress: SortOrder
+  stripePaymentMethod: SortOrder
+  metaData: SortOrder
+  createdAt: SortOrder
+  updatedAt: SortOrder
+}
+
+input CustomerMaxOrderByAggregateInput {
+  id: SortOrder
+  active: SortOrder
+  tenantId: SortOrder
+  name: SortOrder
+  email: SortOrder
+  mobile: SortOrder
+  cognitoUserId: SortOrder
+  cognitoPoolId: SortOrder
+  stripeCustomerId: SortOrder
+  createdAt: SortOrder
+  updatedAt: SortOrder
+}
+
+input CustomerMinOrderByAggregateInput {
+  id: SortOrder
+  active: SortOrder
+  tenantId: SortOrder
+  name: SortOrder
+  email: SortOrder
+  mobile: SortOrder
+  cognitoUserId: SortOrder
+  cognitoPoolId: SortOrder
+  stripeCustomerId: SortOrder
+  createdAt: SortOrder
+  updatedAt: SortOrder
+}
+
+input PriceListRelationFilter {
+  every: PriceWhereInput
+  some: PriceWhereInput
+  none: PriceWhereInput
+}
+
+input PriceOrderByRelationAggregateInput {
+  _count: SortOrder
+}
+
+input ProductCountOrderByAggregateInput {
+  id: SortOrder
+  active: SortOrder
+  name: SortOrder
+  image: SortOrder
+  description: SortOrder
+  stripeProductId: SortOrder
+  metaData: SortOrder
+  createdAt: SortOrder
+  updatedAt: SortOrder
+}
+
+input ProductMaxOrderByAggregateInput {
+  id: SortOrder
+  active: SortOrder
+  name: SortOrder
+  image: SortOrder
+  description: SortOrder
+  stripeProductId: SortOrder
+  createdAt: SortOrder
+  updatedAt: SortOrder
+}
+
+input ProductMinOrderByAggregateInput {
+  id: SortOrder
+  active: SortOrder
+  name: SortOrder
+  image: SortOrder
+  description: SortOrder
+  stripeProductId: SortOrder
+  createdAt: SortOrder
+  updatedAt: SortOrder
+}
+
+input ProductRelationFilter {
+  is: ProductWhereInput
+  isNot: ProductWhereInput
+}
+
+input IntNullableFilter {
+  equals: Int
+  in: [Int!]
+  notIn: [Int!]
+  lt: Int
+  lte: Int
+  gt: Int
+  gte: Int
+  not: NestedIntNullableFilter
+}
+
+input EnumpricingTypeFilter {
+  equals: pricingType
+  in: [pricingType!]
+  notIn: [pricingType!]
+  not: NestedEnumpricingTypeFilter
+}
+
+input EnumpricingIntervalFilter {
+  equals: pricingInterval
+  in: [pricingInterval!]
+  notIn: [pricingInterval!]
+  not: NestedEnumpricingIntervalFilter
+}
+
+input PriceCountOrderByAggregateInput {
+  id: SortOrder
+  active: SortOrder
+  productId: SortOrder
+  description: SortOrder
+  unitAmount: SortOrder
+  currency: SortOrder
+  type: SortOrder
+  interval: SortOrder
+  intervalCount: SortOrder
+  trialPeriod: SortOrder
+  stripePriceId: SortOrder
+  metaData: SortOrder
+  createdAt: SortOrder
+  updatedAt: SortOrder
+}
+
+input PriceAvgOrderByAggregateInput {
+  unitAmount: SortOrder
+  intervalCount: SortOrder
+  trialPeriod: SortOrder
+}
+
+input PriceMaxOrderByAggregateInput {
+  id: SortOrder
+  active: SortOrder
+  productId: SortOrder
+  description: SortOrder
+  unitAmount: SortOrder
+  currency: SortOrder
+  type: SortOrder
+  interval: SortOrder
+  intervalCount: SortOrder
+  trialPeriod: SortOrder
+  stripePriceId: SortOrder
+  createdAt: SortOrder
+  updatedAt: SortOrder
+}
+
+input PriceMinOrderByAggregateInput {
+  id: SortOrder
+  active: SortOrder
+  productId: SortOrder
+  description: SortOrder
+  unitAmount: SortOrder
+  currency: SortOrder
+  type: SortOrder
+  interval: SortOrder
+  intervalCount: SortOrder
+  trialPeriod: SortOrder
+  stripePriceId: SortOrder
+  createdAt: SortOrder
+  updatedAt: SortOrder
+}
+
+input PriceSumOrderByAggregateInput {
+  unitAmount: SortOrder
+  intervalCount: SortOrder
+  trialPeriod: SortOrder
+}
+
+input IntNullableWithAggregatesFilter {
+  equals: Int
+  in: [Int!]
+  notIn: [Int!]
+  lt: Int
+  lte: Int
+  gt: Int
+  gte: Int
+  not: NestedIntNullableWithAggregatesFilter
+  _count: NestedIntNullableFilter
+  _avg: NestedFloatNullableFilter
+  _sum: NestedIntNullableFilter
+  _min: NestedIntNullableFilter
+  _max: NestedIntNullableFilter
+}
+
+input EnumpricingTypeWithAggregatesFilter {
+  equals: pricingType
+  in: [pricingType!]
+  notIn: [pricingType!]
+  not: NestedEnumpricingTypeWithAggregatesFilter
+  _count: NestedIntFilter
+  _min: NestedEnumpricingTypeFilter
+  _max: NestedEnumpricingTypeFilter
+}
+
+input EnumpricingIntervalWithAggregatesFilter {
+  equals: pricingInterval
+  in: [pricingInterval!]
+  notIn: [pricingInterval!]
+  not: NestedEnumpricingIntervalWithAggregatesFilter
+  _count: NestedIntFilter
+  _min: NestedEnumpricingIntervalFilter
+  _max: NestedEnumpricingIntervalFilter
+}
+
+input IntFilter {
+  equals: Int
+  in: [Int!]
+  notIn: [Int!]
+  lt: Int
+  lte: Int
+  gt: Int
+  gte: Int
+  not: NestedIntFilter
+}
+
+input EnumsubscriptionStatusFilter {
+  equals: subscriptionStatus
+  in: [subscriptionStatus!]
+  notIn: [subscriptionStatus!]
+  not: NestedEnumsubscriptionStatusFilter
+}
+
+input PriceRelationFilter {
+  is: PriceWhereInput
+  isNot: PriceWhereInput
+}
+
+input DateTimeNullableFilter {
+  equals: DateTime
+  in: [DateTime!]
+  notIn: [DateTime!]
+  lt: DateTime
+  lte: DateTime
+  gt: DateTime
+  gte: DateTime
+  not: NestedDateTimeNullableFilter
+}
+
+input SubscriptionCountOrderByAggregateInput {
+  id: SortOrder
+  status: SortOrder
+  customerId: SortOrder
+  priceId: SortOrder
+  quantity: SortOrder
+  cancelAtPeriodEnd: SortOrder
+  currentPeriodStartAt: SortOrder
+  currentPeriodEndAt: SortOrder
+  endedAt: SortOrder
+  cancelAt: SortOrder
+  canceledAat: SortOrder
+  trialStartAt: SortOrder
+  trialEndAt: SortOrder
+  stripeSubscriptionId: SortOrder
+  metaData: SortOrder
+  createdAt: SortOrder
+  updatedAt: SortOrder
+}
+
+input SubscriptionAvgOrderByAggregateInput {
+  id: SortOrder
+  quantity: SortOrder
+}
+
+input SubscriptionMaxOrderByAggregateInput {
+  id: SortOrder
+  status: SortOrder
+  customerId: SortOrder
+  priceId: SortOrder
+  quantity: SortOrder
+  cancelAtPeriodEnd: SortOrder
+  currentPeriodStartAt: SortOrder
+  currentPeriodEndAt: SortOrder
+  endedAt: SortOrder
+  cancelAt: SortOrder
+  canceledAat: SortOrder
+  trialStartAt: SortOrder
+  trialEndAt: SortOrder
+  stripeSubscriptionId: SortOrder
+  createdAt: SortOrder
+  updatedAt: SortOrder
+}
+
+input SubscriptionMinOrderByAggregateInput {
+  id: SortOrder
+  status: SortOrder
+  customerId: SortOrder
+  priceId: SortOrder
+  quantity: SortOrder
+  cancelAtPeriodEnd: SortOrder
+  currentPeriodStartAt: SortOrder
+  currentPeriodEndAt: SortOrder
+  endedAt: SortOrder
+  cancelAt: SortOrder
+  canceledAat: SortOrder
+  trialStartAt: SortOrder
+  trialEndAt: SortOrder
+  stripeSubscriptionId: SortOrder
+  createdAt: SortOrder
+  updatedAt: SortOrder
+}
+
+input SubscriptionSumOrderByAggregateInput {
+  id: SortOrder
+  quantity: SortOrder
+}
+
+input IntWithAggregatesFilter {
+  equals: Int
+  in: [Int!]
+  notIn: [Int!]
+  lt: Int
+  lte: Int
+  gt: Int
+  gte: Int
+  not: NestedIntWithAggregatesFilter
+  _count: NestedIntFilter
+  _avg: NestedFloatFilter
+  _sum: NestedIntFilter
+  _min: NestedIntFilter
+  _max: NestedIntFilter
+}
+
+input EnumsubscriptionStatusWithAggregatesFilter {
+  equals: subscriptionStatus
+  in: [subscriptionStatus!]
+  notIn: [subscriptionStatus!]
+  not: NestedEnumsubscriptionStatusWithAggregatesFilter
+  _count: NestedIntFilter
+  _min: NestedEnumsubscriptionStatusFilter
+  _max: NestedEnumsubscriptionStatusFilter
+}
+
+input DateTimeNullableWithAggregatesFilter {
+  equals: DateTime
+  in: [DateTime!]
+  notIn: [DateTime!]
+  lt: DateTime
+  lte: DateTime
+  gt: DateTime
+  gte: DateTime
+  not: NestedDateTimeNullableWithAggregatesFilter
+  _count: NestedIntNullableFilter
+  _min: NestedDateTimeNullableFilter
+  _max: NestedDateTimeNullableFilter
+}
+
+input StringFieldUpdateOperationsInput {
+  set: String
+}
+
+input BoolFieldUpdateOperationsInput {
+  set: Boolean
+}
+
+input NullableStringFieldUpdateOperationsInput {
+  set: String
+}
+
+input EnumUserRoleFieldUpdateOperationsInput {
+  set: UserRole
+}
+
+input DateTimeFieldUpdateOperationsInput {
+  set: DateTime
+}
+
+input CustomerCreateNestedOneWithoutTenantInput {
+  create: CustomerUncheckedCreateWithoutTenantInput
+  connectOrCreate: CustomerCreateOrConnectWithoutTenantInput
+  connect: CustomerWhereUniqueInput
+}
+
+input CustomerUncheckedCreateNestedOneWithoutTenantInput {
+  create: CustomerUncheckedCreateWithoutTenantInput
+  connectOrCreate: CustomerCreateOrConnectWithoutTenantInput
+  connect: CustomerWhereUniqueInput
+}
+
+input CustomerUpdateOneWithoutTenantInput {
+  create: CustomerUncheckedCreateWithoutTenantInput
+  connectOrCreate: CustomerCreateOrConnectWithoutTenantInput
+  upsert: CustomerUpsertWithoutTenantInput
+  connect: CustomerWhereUniqueInput
+  disconnect: Boolean
+  delete: Boolean
+  update: CustomerUncheckedUpdateWithoutTenantInput
+}
+
+input CustomerUncheckedUpdateOneWithoutTenantInput {
+  create: CustomerUncheckedCreateWithoutTenantInput
+  connectOrCreate: CustomerCreateOrConnectWithoutTenantInput
+  upsert: CustomerUpsertWithoutTenantInput
+  connect: CustomerWhereUniqueInput
+  disconnect: Boolean
+  delete: Boolean
+  update: CustomerUncheckedUpdateWithoutTenantInput
+}
+
+input TenantCreateNestedOneWithoutCustomerInput {
+  create: TenantUncheckedCreateWithoutCustomerInput
+  connectOrCreate: TenantCreateOrConnectWithoutCustomerInput
+  connect: TenantWhereUniqueInput
+}
+
+input SubscriptionCreateNestedManyWithoutCustomerInput {
+  create: [SubscriptionCreateWithoutCustomerInput!]
+  connectOrCreate: [SubscriptionCreateOrConnectWithoutCustomerInput!]
+  createMany: SubscriptionCreateManyCustomerInputEnvelope
+  connect: [SubscriptionWhereUniqueInput!]
+}
+
+input SubscriptionUncheckedCreateNestedManyWithoutCustomerInput {
+  create: [SubscriptionCreateWithoutCustomerInput!]
+  connectOrCreate: [SubscriptionCreateOrConnectWithoutCustomerInput!]
+  createMany: SubscriptionCreateManyCustomerInputEnvelope
+  connect: [SubscriptionWhereUniqueInput!]
+}
+
+input TenantUpdateOneRequiredWithoutCustomerInput {
+  create: TenantUncheckedCreateWithoutCustomerInput
+  connectOrCreate: TenantCreateOrConnectWithoutCustomerInput
+  upsert: TenantUpsertWithoutCustomerInput
+  connect: TenantWhereUniqueInput
+  update: TenantUncheckedUpdateWithoutCustomerInput
+}
+
+input SubscriptionUpdateManyWithoutCustomerInput {
+  create: [SubscriptionCreateWithoutCustomerInput!]
+  connectOrCreate: [SubscriptionCreateOrConnectWithoutCustomerInput!]
+  upsert: [SubscriptionUpsertWithWhereUniqueWithoutCustomerInput!]
+  createMany: SubscriptionCreateManyCustomerInputEnvelope
+  connect: [SubscriptionWhereUniqueInput!]
+  set: [SubscriptionWhereUniqueInput!]
+  disconnect: [SubscriptionWhereUniqueInput!]
+  delete: [SubscriptionWhereUniqueInput!]
+  update: [SubscriptionUpdateWithWhereUniqueWithoutCustomerInput!]
+  updateMany: [SubscriptionUpdateManyWithWhereWithoutCustomerInput!]
+  deleteMany: [SubscriptionScalarWhereInput!]
+}
+
+input SubscriptionUncheckedUpdateManyWithoutCustomerInput {
+  create: [SubscriptionCreateWithoutCustomerInput!]
+  connectOrCreate: [SubscriptionCreateOrConnectWithoutCustomerInput!]
+  upsert: [SubscriptionUpsertWithWhereUniqueWithoutCustomerInput!]
+  createMany: SubscriptionCreateManyCustomerInputEnvelope
+  connect: [SubscriptionWhereUniqueInput!]
+  set: [SubscriptionWhereUniqueInput!]
+  disconnect: [SubscriptionWhereUniqueInput!]
+  delete: [SubscriptionWhereUniqueInput!]
+  update: [SubscriptionUpdateWithWhereUniqueWithoutCustomerInput!]
+  updateMany: [SubscriptionUpdateManyWithWhereWithoutCustomerInput!]
+  deleteMany: [SubscriptionScalarWhereInput!]
+}
+
+input PriceCreateNestedManyWithoutProductInput {
+  create: [PriceCreateWithoutProductInput!]
+  connectOrCreate: [PriceCreateOrConnectWithoutProductInput!]
+  createMany: PriceCreateManyProductInputEnvelope
+  connect: [PriceWhereUniqueInput!]
+}
+
+input PriceUncheckedCreateNestedManyWithoutProductInput {
+  create: [PriceCreateWithoutProductInput!]
+  connectOrCreate: [PriceCreateOrConnectWithoutProductInput!]
+  createMany: PriceCreateManyProductInputEnvelope
+  connect: [PriceWhereUniqueInput!]
+}
+
+input PriceUpdateManyWithoutProductInput {
+  create: [PriceCreateWithoutProductInput!]
+  connectOrCreate: [PriceCreateOrConnectWithoutProductInput!]
+  upsert: [PriceUpsertWithWhereUniqueWithoutProductInput!]
+  createMany: PriceCreateManyProductInputEnvelope
+  connect: [PriceWhereUniqueInput!]
+  set: [PriceWhereUniqueInput!]
+  disconnect: [PriceWhereUniqueInput!]
+  delete: [PriceWhereUniqueInput!]
+  update: [PriceUpdateWithWhereUniqueWithoutProductInput!]
+  updateMany: [PriceUpdateManyWithWhereWithoutProductInput!]
+  deleteMany: [PriceScalarWhereInput!]
+}
+
+input PriceUncheckedUpdateManyWithoutProductInput {
+  create: [PriceCreateWithoutProductInput!]
+  connectOrCreate: [PriceCreateOrConnectWithoutProductInput!]
+  upsert: [PriceUpsertWithWhereUniqueWithoutProductInput!]
+  createMany: PriceCreateManyProductInputEnvelope
+  connect: [PriceWhereUniqueInput!]
+  set: [PriceWhereUniqueInput!]
+  disconnect: [PriceWhereUniqueInput!]
+  delete: [PriceWhereUniqueInput!]
+  update: [PriceUpdateWithWhereUniqueWithoutProductInput!]
+  updateMany: [PriceUpdateManyWithWhereWithoutProductInput!]
+  deleteMany: [PriceScalarWhereInput!]
+}
+
+input ProductCreateNestedOneWithoutPricesInput {
+  create: ProductUncheckedCreateWithoutPricesInput
+  connectOrCreate: ProductCreateOrConnectWithoutPricesInput
+  connect: ProductWhereUniqueInput
+}
+
+input SubscriptionCreateNestedManyWithoutPriceInput {
+  create: [SubscriptionCreateWithoutPriceInput!]
+  connectOrCreate: [SubscriptionCreateOrConnectWithoutPriceInput!]
+  createMany: SubscriptionCreateManyPriceInputEnvelope
+  connect: [SubscriptionWhereUniqueInput!]
+}
+
+input SubscriptionUncheckedCreateNestedManyWithoutPriceInput {
+  create: [SubscriptionCreateWithoutPriceInput!]
+  connectOrCreate: [SubscriptionCreateOrConnectWithoutPriceInput!]
+  createMany: SubscriptionCreateManyPriceInputEnvelope
+  connect: [SubscriptionWhereUniqueInput!]
+}
+
+input NullableIntFieldUpdateOperationsInput {
+  set: Int
+  increment: Int
+  decrement: Int
+  multiply: Int
+  divide: Int
+}
+
+input EnumpricingTypeFieldUpdateOperationsInput {
+  set: pricingType
+}
+
+input EnumpricingIntervalFieldUpdateOperationsInput {
+  set: pricingInterval
+}
+
+input ProductUpdateOneRequiredWithoutPricesInput {
+  create: ProductUncheckedCreateWithoutPricesInput
+  connectOrCreate: ProductCreateOrConnectWithoutPricesInput
+  upsert: ProductUpsertWithoutPricesInput
+  connect: ProductWhereUniqueInput
+  update: ProductUncheckedUpdateWithoutPricesInput
+}
+
+input SubscriptionUpdateManyWithoutPriceInput {
+  create: [SubscriptionCreateWithoutPriceInput!]
+  connectOrCreate: [SubscriptionCreateOrConnectWithoutPriceInput!]
+  upsert: [SubscriptionUpsertWithWhereUniqueWithoutPriceInput!]
+  createMany: SubscriptionCreateManyPriceInputEnvelope
+  connect: [SubscriptionWhereUniqueInput!]
+  set: [SubscriptionWhereUniqueInput!]
+  disconnect: [SubscriptionWhereUniqueInput!]
+  delete: [SubscriptionWhereUniqueInput!]
+  update: [SubscriptionUpdateWithWhereUniqueWithoutPriceInput!]
+  updateMany: [SubscriptionUpdateManyWithWhereWithoutPriceInput!]
+  deleteMany: [SubscriptionScalarWhereInput!]
+}
+
+input SubscriptionUncheckedUpdateManyWithoutPriceInput {
+  create: [SubscriptionCreateWithoutPriceInput!]
+  connectOrCreate: [SubscriptionCreateOrConnectWithoutPriceInput!]
+  upsert: [SubscriptionUpsertWithWhereUniqueWithoutPriceInput!]
+  createMany: SubscriptionCreateManyPriceInputEnvelope
+  connect: [SubscriptionWhereUniqueInput!]
+  set: [SubscriptionWhereUniqueInput!]
+  disconnect: [SubscriptionWhereUniqueInput!]
+  delete: [SubscriptionWhereUniqueInput!]
+  update: [SubscriptionUpdateWithWhereUniqueWithoutPriceInput!]
+  updateMany: [SubscriptionUpdateManyWithWhereWithoutPriceInput!]
+  deleteMany: [SubscriptionScalarWhereInput!]
+}
+
+input CustomerCreateNestedOneWithoutSubscriptionsInput {
+  create: CustomerUncheckedCreateWithoutSubscriptionsInput
+  connectOrCreate: CustomerCreateOrConnectWithoutSubscriptionsInput
+  connect: CustomerWhereUniqueInput
+}
+
+input PriceCreateNestedOneWithoutSubscriptionsInput {
+  create: PriceUncheckedCreateWithoutSubscriptionsInput
+  connectOrCreate: PriceCreateOrConnectWithoutSubscriptionsInput
+  connect: PriceWhereUniqueInput
+}
+
+input EnumsubscriptionStatusFieldUpdateOperationsInput {
+  set: subscriptionStatus
+}
+
+input IntFieldUpdateOperationsInput {
+  set: Int
+  increment: Int
+  decrement: Int
+  multiply: Int
+  divide: Int
+}
+
+input NullableDateTimeFieldUpdateOperationsInput {
+  set: DateTime
+}
+
+input CustomerUpdateOneRequiredWithoutSubscriptionsInput {
+  create: CustomerUncheckedCreateWithoutSubscriptionsInput
+  connectOrCreate: CustomerCreateOrConnectWithoutSubscriptionsInput
+  upsert: CustomerUpsertWithoutSubscriptionsInput
+  connect: CustomerWhereUniqueInput
+  update: CustomerUncheckedUpdateWithoutSubscriptionsInput
+}
+
+input PriceUpdateOneRequiredWithoutSubscriptionsInput {
+  create: PriceUncheckedCreateWithoutSubscriptionsInput
+  connectOrCreate: PriceCreateOrConnectWithoutSubscriptionsInput
+  upsert: PriceUpsertWithoutSubscriptionsInput
+  connect: PriceWhereUniqueInput
+  update: PriceUncheckedUpdateWithoutSubscriptionsInput
+}
+
+input NestedStringFilter {
+  equals: String
+  in: [String!]
+  notIn: [String!]
+  lt: String
+  lte: String
+  gt: String
+  gte: String
+  contains: String
+  startsWith: String
+  endsWith: String
+  not: NestedStringFilter
+}
+
+input NestedBoolFilter {
+  equals: Boolean
+  not: NestedBoolFilter
+}
+
+input NestedStringNullableFilter {
+  equals: String
+  in: [String!]
+  notIn: [String!]
+  lt: String
+  lte: String
+  gt: String
+  gte: String
+  contains: String
+  startsWith: String
+  endsWith: String
+  not: NestedStringNullableFilter
+}
+
+input NestedEnumUserRoleFilter {
+  equals: UserRole
+  in: [UserRole!]
+  notIn: [UserRole!]
+  not: NestedEnumUserRoleFilter
+}
+
+input NestedDateTimeFilter {
+  equals: DateTime
+  in: [DateTime!]
+  notIn: [DateTime!]
+  lt: DateTime
+  lte: DateTime
+  gt: DateTime
+  gte: DateTime
+  not: NestedDateTimeFilter
+}
+
+input NestedStringWithAggregatesFilter {
+  equals: String
+  in: [String!]
+  notIn: [String!]
+  lt: String
+  lte: String
+  gt: String
+  gte: String
+  contains: String
+  startsWith: String
+  endsWith: String
+  not: NestedStringWithAggregatesFilter
+  _count: NestedIntFilter
+  _min: NestedStringFilter
+  _max: NestedStringFilter
+}
+
+input NestedIntFilter {
+  equals: Int
+  in: [Int!]
+  notIn: [Int!]
+  lt: Int
+  lte: Int
+  gt: Int
+  gte: Int
+  not: NestedIntFilter
+}
+
+input NestedBoolWithAggregatesFilter {
+  equals: Boolean
+  not: NestedBoolWithAggregatesFilter
+  _count: NestedIntFilter
+  _min: NestedBoolFilter
+  _max: NestedBoolFilter
+}
+
+input NestedStringNullableWithAggregatesFilter {
+  equals: String
+  in: [String!]
+  notIn: [String!]
+  lt: String
+  lte: String
+  gt: String
+  gte: String
+  contains: String
+  startsWith: String
+  endsWith: String
+  not: NestedStringNullableWithAggregatesFilter
+  _count: NestedIntNullableFilter
+  _min: NestedStringNullableFilter
+  _max: NestedStringNullableFilter
+}
+
+input NestedIntNullableFilter {
+  equals: Int
+  in: [Int!]
+  notIn: [Int!]
+  lt: Int
+  lte: Int
+  gt: Int
+  gte: Int
+  not: NestedIntNullableFilter
+}
+
+input NestedEnumUserRoleWithAggregatesFilter {
+  equals: UserRole
+  in: [UserRole!]
+  notIn: [UserRole!]
+  not: NestedEnumUserRoleWithAggregatesFilter
+  _count: NestedIntFilter
+  _min: NestedEnumUserRoleFilter
+  _max: NestedEnumUserRoleFilter
+}
+
+input NestedDateTimeWithAggregatesFilter {
+  equals: DateTime
+  in: [DateTime!]
+  notIn: [DateTime!]
+  lt: DateTime
+  lte: DateTime
+  gt: DateTime
+  gte: DateTime
+  not: NestedDateTimeWithAggregatesFilter
+  _count: NestedIntFilter
+  _min: NestedDateTimeFilter
+  _max: NestedDateTimeFilter
+}
+
+input NestedJsonNullableFilter {
+  equals: Json
+  not: Json
+}
+
+input NestedEnumpricingTypeFilter {
+  equals: pricingType
+  in: [pricingType!]
+  notIn: [pricingType!]
+  not: NestedEnumpricingTypeFilter
+}
+
+input NestedEnumpricingIntervalFilter {
+  equals: pricingInterval
+  in: [pricingInterval!]
+  notIn: [pricingInterval!]
+  not: NestedEnumpricingIntervalFilter
+}
+
+input NestedIntNullableWithAggregatesFilter {
+  equals: Int
+  in: [Int!]
+  notIn: [Int!]
+  lt: Int
+  lte: Int
+  gt: Int
+  gte: Int
+  not: NestedIntNullableWithAggregatesFilter
+  _count: NestedIntNullableFilter
+  _avg: NestedFloatNullableFilter
+  _sum: NestedIntNullableFilter
+  _min: NestedIntNullableFilter
+  _max: NestedIntNullableFilter
+}
+
+input NestedFloatNullableFilter {
+  equals: Float
+  in: [Float!]
+  notIn: [Float!]
+  lt: Float
+  lte: Float
+  gt: Float
+  gte: Float
+  not: NestedFloatNullableFilter
+}
+
+input NestedEnumpricingTypeWithAggregatesFilter {
+  equals: pricingType
+  in: [pricingType!]
+  notIn: [pricingType!]
+  not: NestedEnumpricingTypeWithAggregatesFilter
+  _count: NestedIntFilter
+  _min: NestedEnumpricingTypeFilter
+  _max: NestedEnumpricingTypeFilter
+}
+
+input NestedEnumpricingIntervalWithAggregatesFilter {
+  equals: pricingInterval
+  in: [pricingInterval!]
+  notIn: [pricingInterval!]
+  not: NestedEnumpricingIntervalWithAggregatesFilter
+  _count: NestedIntFilter
+  _min: NestedEnumpricingIntervalFilter
+  _max: NestedEnumpricingIntervalFilter
+}
+
+input NestedEnumsubscriptionStatusFilter {
+  equals: subscriptionStatus
+  in: [subscriptionStatus!]
+  notIn: [subscriptionStatus!]
+  not: NestedEnumsubscriptionStatusFilter
+}
+
+input NestedDateTimeNullableFilter {
+  equals: DateTime
+  in: [DateTime!]
+  notIn: [DateTime!]
+  lt: DateTime
+  lte: DateTime
+  gt: DateTime
+  gte: DateTime
+  not: NestedDateTimeNullableFilter
+}
+
+input NestedIntWithAggregatesFilter {
+  equals: Int
+  in: [Int!]
+  notIn: [Int!]
+  lt: Int
+  lte: Int
+  gt: Int
+  gte: Int
+  not: NestedIntWithAggregatesFilter
+  _count: NestedIntFilter
+  _avg: NestedFloatFilter
+  _sum: NestedIntFilter
+  _min: NestedIntFilter
+  _max: NestedIntFilter
+}
+
+input NestedFloatFilter {
+  equals: Float
+  in: [Float!]
+  notIn: [Float!]
+  lt: Float
+  lte: Float
+  gt: Float
+  gte: Float
+  not: NestedFloatFilter
+}
+
+input NestedEnumsubscriptionStatusWithAggregatesFilter {
+  equals: subscriptionStatus
+  in: [subscriptionStatus!]
+  notIn: [subscriptionStatus!]
+  not: NestedEnumsubscriptionStatusWithAggregatesFilter
+  _count: NestedIntFilter
+  _min: NestedEnumsubscriptionStatusFilter
+  _max: NestedEnumsubscriptionStatusFilter
+}
+
+input NestedDateTimeNullableWithAggregatesFilter {
+  equals: DateTime
+  in: [DateTime!]
+  notIn: [DateTime!]
+  lt: DateTime
+  lte: DateTime
+  gt: DateTime
+  gte: DateTime
+  not: NestedDateTimeNullableWithAggregatesFilter
+  _count: NestedIntNullableFilter
+  _min: NestedDateTimeNullableFilter
+  _max: NestedDateTimeNullableFilter
+}
+
+input CustomerCreateWithoutTenantInput {
+  id: String
+  active: Boolean
+  name: String
+  email: String!
+  mobile: String
+  cognitoUserId: String
+  cognitoPoolId: String
+  stripeCustomerId: String
+  stripeBillingAddress: Json
+  stripePaymentMethod: Json
+  metaData: Json
+  createdAt: DateTime
+  updatedAt: DateTime
+  subscriptions: SubscriptionCreateNestedManyWithoutCustomerInput
+}
+
+input CustomerUncheckedCreateWithoutTenantInput {
+  id: String
+  active: Boolean
+  name: String
+  email: String!
+  mobile: String
+  cognitoUserId: String
+  cognitoPoolId: String
+  stripeCustomerId: String
+  stripeBillingAddress: Json
+  stripePaymentMethod: Json
+  metaData: Json
+  createdAt: DateTime
+  updatedAt: DateTime
+  subscriptions: SubscriptionUncheckedCreateNestedManyWithoutCustomerInput
+}
+
+input CustomerCreateOrConnectWithoutTenantInput {
+  where: CustomerWhereUniqueInput!
+  create: CustomerUncheckedCreateWithoutTenantInput!
+}
+
+input CustomerUpsertWithoutTenantInput {
+  update: CustomerUncheckedUpdateWithoutTenantInput!
+  create: CustomerUncheckedCreateWithoutTenantInput!
+}
+
+input CustomerUpdateWithoutTenantInput {
+  id: StringFieldUpdateOperationsInput
+  active: BoolFieldUpdateOperationsInput
+  name: NullableStringFieldUpdateOperationsInput
+  email: StringFieldUpdateOperationsInput
+  mobile: NullableStringFieldUpdateOperationsInput
+  cognitoUserId: NullableStringFieldUpdateOperationsInput
+  cognitoPoolId: NullableStringFieldUpdateOperationsInput
+  stripeCustomerId: NullableStringFieldUpdateOperationsInput
+  stripeBillingAddress: Json
+  stripePaymentMethod: Json
+  metaData: Json
+  createdAt: DateTimeFieldUpdateOperationsInput
+  updatedAt: DateTimeFieldUpdateOperationsInput
+  subscriptions: SubscriptionUpdateManyWithoutCustomerInput
+}
+
+input CustomerUncheckedUpdateWithoutTenantInput {
+  id: StringFieldUpdateOperationsInput
+  active: BoolFieldUpdateOperationsInput
+  name: NullableStringFieldUpdateOperationsInput
+  email: StringFieldUpdateOperationsInput
+  mobile: NullableStringFieldUpdateOperationsInput
+  cognitoUserId: NullableStringFieldUpdateOperationsInput
+  cognitoPoolId: NullableStringFieldUpdateOperationsInput
+  stripeCustomerId: NullableStringFieldUpdateOperationsInput
+  stripeBillingAddress: Json
+  stripePaymentMethod: Json
+  metaData: Json
+  createdAt: DateTimeFieldUpdateOperationsInput
+  updatedAt: DateTimeFieldUpdateOperationsInput
+  subscriptions: SubscriptionUncheckedUpdateManyWithoutCustomerInput
+}
+
+input TenantCreateWithoutCustomerInput {
+  id: String
+  active: Boolean
+  name: String
+  metaData: Json
+  createdAt: DateTime
+  updatedAt: DateTime
+}
+
+input TenantUncheckedCreateWithoutCustomerInput {
+  id: String
+  active: Boolean
+  name: String
+  metaData: Json
+  createdAt: DateTime
+  updatedAt: DateTime
+}
+
+input TenantCreateOrConnectWithoutCustomerInput {
+  where: TenantWhereUniqueInput!
+  create: TenantUncheckedCreateWithoutCustomerInput!
+}
+
+input SubscriptionCreateWithoutCustomerInput {
+  status: subscriptionStatus
+  quantity: Int
+  cancelAtPeriodEnd: Boolean
+  currentPeriodStartAt: DateTime
+  currentPeriodEndAt: DateTime
+  endedAt: DateTime
+  cancelAt: DateTime
+  canceledAat: DateTime
+  trialStartAt: DateTime
+  trialEndAt: DateTime
+  stripeSubscriptionId: String
+  metaData: Json
+  createdAt: DateTime
+  updatedAt: DateTime
+  price: PriceCreateNestedOneWithoutSubscriptionsInput!
+}
+
+input SubscriptionUncheckedCreateWithoutCustomerInput {
+  id: Int
+  status: subscriptionStatus
+  priceId: String!
+  quantity: Int
+  cancelAtPeriodEnd: Boolean
+  currentPeriodStartAt: DateTime
+  currentPeriodEndAt: DateTime
+  endedAt: DateTime
+  cancelAt: DateTime
+  canceledAat: DateTime
+  trialStartAt: DateTime
+  trialEndAt: DateTime
+  stripeSubscriptionId: String
+  metaData: Json
+  createdAt: DateTime
+  updatedAt: DateTime
+}
+
+input SubscriptionCreateOrConnectWithoutCustomerInput {
+  where: SubscriptionWhereUniqueInput!
+  create: SubscriptionUncheckedCreateWithoutCustomerInput!
+}
+
+input SubscriptionCreateManyCustomerInputEnvelope {
+  data: [SubscriptionCreateManyCustomerInput!]!
+  skipDuplicates: Boolean
+}
+
+input TenantUpsertWithoutCustomerInput {
+  update: TenantUncheckedUpdateWithoutCustomerInput!
+  create: TenantUncheckedCreateWithoutCustomerInput!
+}
+
+input TenantUpdateWithoutCustomerInput {
+  id: StringFieldUpdateOperationsInput
+  active: BoolFieldUpdateOperationsInput
+  name: NullableStringFieldUpdateOperationsInput
+  metaData: Json
+  createdAt: DateTimeFieldUpdateOperationsInput
+  updatedAt: DateTimeFieldUpdateOperationsInput
+}
+
+input TenantUncheckedUpdateWithoutCustomerInput {
+  id: StringFieldUpdateOperationsInput
+  active: BoolFieldUpdateOperationsInput
+  name: NullableStringFieldUpdateOperationsInput
+  metaData: Json
+  createdAt: DateTimeFieldUpdateOperationsInput
+  updatedAt: DateTimeFieldUpdateOperationsInput
+}
+
+input SubscriptionUpsertWithWhereUniqueWithoutCustomerInput {
+  where: SubscriptionWhereUniqueInput!
+  update: SubscriptionUncheckedUpdateWithoutCustomerInput!
+  create: SubscriptionUncheckedCreateWithoutCustomerInput!
+}
+
+input SubscriptionUpdateWithWhereUniqueWithoutCustomerInput {
+  where: SubscriptionWhereUniqueInput!
+  data: SubscriptionUncheckedUpdateWithoutCustomerInput!
+}
+
+input SubscriptionUpdateManyWithWhereWithoutCustomerInput {
+  where: SubscriptionScalarWhereInput!
+  data: SubscriptionUncheckedUpdateManyWithoutSubscriptionsInput!
+}
+
+input SubscriptionScalarWhereInput {
+  AND: [SubscriptionScalarWhereInput!]
+  OR: [SubscriptionScalarWhereInput!]
+  NOT: [SubscriptionScalarWhereInput!]
+  id: IntFilter
+  status: EnumsubscriptionStatusFilter
+  customerId: StringFilter
+  priceId: StringFilter
+  quantity: IntFilter
+  cancelAtPeriodEnd: BoolFilter
+  currentPeriodStartAt: DateTimeNullableFilter
+  currentPeriodEndAt: DateTimeNullableFilter
+  endedAt: DateTimeNullableFilter
+  cancelAt: DateTimeNullableFilter
+  canceledAat: DateTimeNullableFilter
+  trialStartAt: DateTimeNullableFilter
+  trialEndAt: DateTimeNullableFilter
+  stripeSubscriptionId: StringNullableFilter
+  metaData: JsonNullableFilter
+  createdAt: DateTimeFilter
+  updatedAt: DateTimeFilter
+}
+
+input PriceCreateWithoutProductInput {
+  id: String
+  active: Boolean
+  description: String
+  unitAmount: Int
+  currency: String
+  type: pricingType
+  interval: pricingInterval
+  intervalCount: Int
+  trialPeriod: Int
+  stripePriceId: String
+  metaData: Json
+  createdAt: DateTime
+  updatedAt: DateTime
+  subscriptions: SubscriptionCreateNestedManyWithoutPriceInput
+}
+
+input PriceUncheckedCreateWithoutProductInput {
+  id: String
+  active: Boolean
+  description: String
+  unitAmount: Int
+  currency: String
+  type: pricingType
+  interval: pricingInterval
+  intervalCount: Int
+  trialPeriod: Int
+  stripePriceId: String
+  metaData: Json
+  createdAt: DateTime
+  updatedAt: DateTime
+  subscriptions: SubscriptionUncheckedCreateNestedManyWithoutPriceInput
+}
+
+input PriceCreateOrConnectWithoutProductInput {
+  where: PriceWhereUniqueInput!
+  create: PriceUncheckedCreateWithoutProductInput!
+}
+
+input PriceCreateManyProductInputEnvelope {
+  data: [PriceCreateManyProductInput!]!
+  skipDuplicates: Boolean
+}
+
+input PriceUpsertWithWhereUniqueWithoutProductInput {
+  where: PriceWhereUniqueInput!
+  update: PriceUncheckedUpdateWithoutProductInput!
+  create: PriceUncheckedCreateWithoutProductInput!
+}
+
+input PriceUpdateWithWhereUniqueWithoutProductInput {
+  where: PriceWhereUniqueInput!
+  data: PriceUncheckedUpdateWithoutProductInput!
+}
+
+input PriceUpdateManyWithWhereWithoutProductInput {
+  where: PriceScalarWhereInput!
+  data: PriceUncheckedUpdateManyWithoutPricesInput!
+}
+
+input PriceScalarWhereInput {
+  AND: [PriceScalarWhereInput!]
+  OR: [PriceScalarWhereInput!]
+  NOT: [PriceScalarWhereInput!]
+  id: StringFilter
+  active: BoolFilter
+  productId: StringFilter
+  description: StringNullableFilter
+  unitAmount: IntNullableFilter
+  currency: StringNullableFilter
+  type: EnumpricingTypeFilter
+  interval: EnumpricingIntervalFilter
+  intervalCount: IntNullableFilter
+  trialPeriod: IntNullableFilter
+  stripePriceId: StringNullableFilter
+  metaData: JsonNullableFilter
+  createdAt: DateTimeFilter
+  updatedAt: DateTimeFilter
+}
+
+input ProductCreateWithoutPricesInput {
+  id: String
+  active: Boolean
+  name: String
+  image: String
+  description: String
+  stripeProductId: String
+  metaData: Json
+  createdAt: DateTime
+  updatedAt: DateTime
+}
+
+input ProductUncheckedCreateWithoutPricesInput {
+  id: String
+  active: Boolean
+  name: String
+  image: String
+  description: String
+  stripeProductId: String
+  metaData: Json
+  createdAt: DateTime
+  updatedAt: DateTime
+}
+
+input ProductCreateOrConnectWithoutPricesInput {
+  where: ProductWhereUniqueInput!
+  create: ProductUncheckedCreateWithoutPricesInput!
+}
+
+input SubscriptionCreateWithoutPriceInput {
+  status: subscriptionStatus
+  quantity: Int
+  cancelAtPeriodEnd: Boolean
+  currentPeriodStartAt: DateTime
+  currentPeriodEndAt: DateTime
+  endedAt: DateTime
+  cancelAt: DateTime
+  canceledAat: DateTime
+  trialStartAt: DateTime
+  trialEndAt: DateTime
+  stripeSubscriptionId: String
+  metaData: Json
+  createdAt: DateTime
+  updatedAt: DateTime
+  customer: CustomerCreateNestedOneWithoutSubscriptionsInput!
+}
+
+input SubscriptionUncheckedCreateWithoutPriceInput {
+  id: Int
+  status: subscriptionStatus
+  customerId: String!
+  quantity: Int
+  cancelAtPeriodEnd: Boolean
+  currentPeriodStartAt: DateTime
+  currentPeriodEndAt: DateTime
+  endedAt: DateTime
+  cancelAt: DateTime
+  canceledAat: DateTime
+  trialStartAt: DateTime
+  trialEndAt: DateTime
+  stripeSubscriptionId: String
+  metaData: Json
+  createdAt: DateTime
+  updatedAt: DateTime
+}
+
+input SubscriptionCreateOrConnectWithoutPriceInput {
+  where: SubscriptionWhereUniqueInput!
+  create: SubscriptionUncheckedCreateWithoutPriceInput!
+}
+
+input SubscriptionCreateManyPriceInputEnvelope {
+  data: [SubscriptionCreateManyPriceInput!]!
+  skipDuplicates: Boolean
+}
+
+input ProductUpsertWithoutPricesInput {
+  update: ProductUncheckedUpdateWithoutPricesInput!
+  create: ProductUncheckedCreateWithoutPricesInput!
+}
+
+input ProductUpdateWithoutPricesInput {
+  id: StringFieldUpdateOperationsInput
+  active: BoolFieldUpdateOperationsInput
+  name: NullableStringFieldUpdateOperationsInput
+  image: NullableStringFieldUpdateOperationsInput
+  description: NullableStringFieldUpdateOperationsInput
+  stripeProductId: NullableStringFieldUpdateOperationsInput
+  metaData: Json
+  createdAt: DateTimeFieldUpdateOperationsInput
+  updatedAt: DateTimeFieldUpdateOperationsInput
+}
+
+input ProductUncheckedUpdateWithoutPricesInput {
+  id: StringFieldUpdateOperationsInput
+  active: BoolFieldUpdateOperationsInput
+  name: NullableStringFieldUpdateOperationsInput
+  image: NullableStringFieldUpdateOperationsInput
+  description: NullableStringFieldUpdateOperationsInput
+  stripeProductId: NullableStringFieldUpdateOperationsInput
+  metaData: Json
+  createdAt: DateTimeFieldUpdateOperationsInput
+  updatedAt: DateTimeFieldUpdateOperationsInput
+}
+
+input SubscriptionUpsertWithWhereUniqueWithoutPriceInput {
+  where: SubscriptionWhereUniqueInput!
+  update: SubscriptionUncheckedUpdateWithoutPriceInput!
+  create: SubscriptionUncheckedCreateWithoutPriceInput!
+}
+
+input SubscriptionUpdateWithWhereUniqueWithoutPriceInput {
+  where: SubscriptionWhereUniqueInput!
+  data: SubscriptionUncheckedUpdateWithoutPriceInput!
+}
+
+input SubscriptionUpdateManyWithWhereWithoutPriceInput {
+  where: SubscriptionScalarWhereInput!
+  data: SubscriptionUncheckedUpdateManyWithoutSubscriptionsInput!
+}
+
+input CustomerCreateWithoutSubscriptionsInput {
+  id: String
+  active: Boolean
+  name: String
+  email: String!
+  mobile: String
+  cognitoUserId: String
+  cognitoPoolId: String
+  stripeCustomerId: String
+  stripeBillingAddress: Json
+  stripePaymentMethod: Json
+  metaData: Json
+  createdAt: DateTime
+  updatedAt: DateTime
+  tenant: TenantCreateNestedOneWithoutCustomerInput!
+}
+
+input CustomerUncheckedCreateWithoutSubscriptionsInput {
+  id: String
+  active: Boolean
+  tenantId: String!
+  name: String
+  email: String!
+  mobile: String
+  cognitoUserId: String
+  cognitoPoolId: String
+  stripeCustomerId: String
+  stripeBillingAddress: Json
+  stripePaymentMethod: Json
+  metaData: Json
+  createdAt: DateTime
+  updatedAt: DateTime
+}
+
+input CustomerCreateOrConnectWithoutSubscriptionsInput {
+  where: CustomerWhereUniqueInput!
+  create: CustomerUncheckedCreateWithoutSubscriptionsInput!
+}
+
+input PriceCreateWithoutSubscriptionsInput {
+  id: String
+  active: Boolean
+  description: String
+  unitAmount: Int
+  currency: String
+  type: pricingType
+  interval: pricingInterval
+  intervalCount: Int
+  trialPeriod: Int
+  stripePriceId: String
+  metaData: Json
+  createdAt: DateTime
+  updatedAt: DateTime
+  product: ProductCreateNestedOneWithoutPricesInput!
+}
+
+input PriceUncheckedCreateWithoutSubscriptionsInput {
+  id: String
+  active: Boolean
+  productId: String!
+  description: String
+  unitAmount: Int
+  currency: String
+  type: pricingType
+  interval: pricingInterval
+  intervalCount: Int
+  trialPeriod: Int
+  stripePriceId: String
+  metaData: Json
+  createdAt: DateTime
+  updatedAt: DateTime
+}
+
+input PriceCreateOrConnectWithoutSubscriptionsInput {
+  where: PriceWhereUniqueInput!
+  create: PriceUncheckedCreateWithoutSubscriptionsInput!
+}
+
+input CustomerUpsertWithoutSubscriptionsInput {
+  update: CustomerUncheckedUpdateWithoutSubscriptionsInput!
+  create: CustomerUncheckedCreateWithoutSubscriptionsInput!
+}
+
+input CustomerUpdateWithoutSubscriptionsInput {
+  id: StringFieldUpdateOperationsInput
+  active: BoolFieldUpdateOperationsInput
+  name: NullableStringFieldUpdateOperationsInput
+  email: StringFieldUpdateOperationsInput
+  mobile: NullableStringFieldUpdateOperationsInput
+  cognitoUserId: NullableStringFieldUpdateOperationsInput
+  cognitoPoolId: NullableStringFieldUpdateOperationsInput
+  stripeCustomerId: NullableStringFieldUpdateOperationsInput
+  stripeBillingAddress: Json
+  stripePaymentMethod: Json
+  metaData: Json
+  createdAt: DateTimeFieldUpdateOperationsInput
+  updatedAt: DateTimeFieldUpdateOperationsInput
+  tenant: TenantUpdateOneRequiredWithoutCustomerInput
+}
+
+input CustomerUncheckedUpdateWithoutSubscriptionsInput {
+  id: StringFieldUpdateOperationsInput
+  active: BoolFieldUpdateOperationsInput
+  tenantId: StringFieldUpdateOperationsInput
+  name: NullableStringFieldUpdateOperationsInput
+  email: StringFieldUpdateOperationsInput
+  mobile: NullableStringFieldUpdateOperationsInput
+  cognitoUserId: NullableStringFieldUpdateOperationsInput
+  cognitoPoolId: NullableStringFieldUpdateOperationsInput
+  stripeCustomerId: NullableStringFieldUpdateOperationsInput
+  stripeBillingAddress: Json
+  stripePaymentMethod: Json
+  metaData: Json
+  createdAt: DateTimeFieldUpdateOperationsInput
+  updatedAt: DateTimeFieldUpdateOperationsInput
+}
+
+input PriceUpsertWithoutSubscriptionsInput {
+  update: PriceUncheckedUpdateWithoutSubscriptionsInput!
+  create: PriceUncheckedCreateWithoutSubscriptionsInput!
+}
+
+input PriceUpdateWithoutSubscriptionsInput {
+  id: StringFieldUpdateOperationsInput
+  active: BoolFieldUpdateOperationsInput
+  description: NullableStringFieldUpdateOperationsInput
+  unitAmount: NullableIntFieldUpdateOperationsInput
+  currency: NullableStringFieldUpdateOperationsInput
+  type: EnumpricingTypeFieldUpdateOperationsInput
+  interval: EnumpricingIntervalFieldUpdateOperationsInput
+  intervalCount: NullableIntFieldUpdateOperationsInput
+  trialPeriod: NullableIntFieldUpdateOperationsInput
+  stripePriceId: NullableStringFieldUpdateOperationsInput
+  metaData: Json
+  createdAt: DateTimeFieldUpdateOperationsInput
+  updatedAt: DateTimeFieldUpdateOperationsInput
+  product: ProductUpdateOneRequiredWithoutPricesInput
+}
+
+input PriceUncheckedUpdateWithoutSubscriptionsInput {
+  id: StringFieldUpdateOperationsInput
+  active: BoolFieldUpdateOperationsInput
+  productId: StringFieldUpdateOperationsInput
+  description: NullableStringFieldUpdateOperationsInput
+  unitAmount: NullableIntFieldUpdateOperationsInput
+  currency: NullableStringFieldUpdateOperationsInput
+  type: EnumpricingTypeFieldUpdateOperationsInput
+  interval: EnumpricingIntervalFieldUpdateOperationsInput
+  intervalCount: NullableIntFieldUpdateOperationsInput
+  trialPeriod: NullableIntFieldUpdateOperationsInput
+  stripePriceId: NullableStringFieldUpdateOperationsInput
+  metaData: Json
+  createdAt: DateTimeFieldUpdateOperationsInput
+  updatedAt: DateTimeFieldUpdateOperationsInput
+}
+
+input SubscriptionCreateManyCustomerInput {
+  id: Int
+  status: subscriptionStatus
+  priceId: String!
+  quantity: Int
+  cancelAtPeriodEnd: Boolean
+  currentPeriodStartAt: DateTime
+  currentPeriodEndAt: DateTime
+  endedAt: DateTime
+  cancelAt: DateTime
+  canceledAat: DateTime
+  trialStartAt: DateTime
+  trialEndAt: DateTime
+  stripeSubscriptionId: String
+  metaData: Json
+  createdAt: DateTime
+  updatedAt: DateTime
+}
+
+input SubscriptionUpdateWithoutCustomerInput {
+  status: EnumsubscriptionStatusFieldUpdateOperationsInput
+  quantity: IntFieldUpdateOperationsInput
+  cancelAtPeriodEnd: BoolFieldUpdateOperationsInput
+  currentPeriodStartAt: NullableDateTimeFieldUpdateOperationsInput
+  currentPeriodEndAt: NullableDateTimeFieldUpdateOperationsInput
+  endedAt: NullableDateTimeFieldUpdateOperationsInput
+  cancelAt: NullableDateTimeFieldUpdateOperationsInput
+  canceledAat: NullableDateTimeFieldUpdateOperationsInput
+  trialStartAt: NullableDateTimeFieldUpdateOperationsInput
+  trialEndAt: NullableDateTimeFieldUpdateOperationsInput
+  stripeSubscriptionId: NullableStringFieldUpdateOperationsInput
+  metaData: Json
+  createdAt: DateTimeFieldUpdateOperationsInput
+  updatedAt: DateTimeFieldUpdateOperationsInput
+  price: PriceUpdateOneRequiredWithoutSubscriptionsInput
+}
+
+input SubscriptionUncheckedUpdateWithoutCustomerInput {
+  id: IntFieldUpdateOperationsInput
+  status: EnumsubscriptionStatusFieldUpdateOperationsInput
+  priceId: StringFieldUpdateOperationsInput
+  quantity: IntFieldUpdateOperationsInput
+  cancelAtPeriodEnd: BoolFieldUpdateOperationsInput
+  currentPeriodStartAt: NullableDateTimeFieldUpdateOperationsInput
+  currentPeriodEndAt: NullableDateTimeFieldUpdateOperationsInput
+  endedAt: NullableDateTimeFieldUpdateOperationsInput
+  cancelAt: NullableDateTimeFieldUpdateOperationsInput
+  canceledAat: NullableDateTimeFieldUpdateOperationsInput
+  trialStartAt: NullableDateTimeFieldUpdateOperationsInput
+  trialEndAt: NullableDateTimeFieldUpdateOperationsInput
+  stripeSubscriptionId: NullableStringFieldUpdateOperationsInput
+  metaData: Json
+  createdAt: DateTimeFieldUpdateOperationsInput
+  updatedAt: DateTimeFieldUpdateOperationsInput
+}
+
+input SubscriptionUncheckedUpdateManyWithoutSubscriptionsInput {
+  id: IntFieldUpdateOperationsInput
+  status: EnumsubscriptionStatusFieldUpdateOperationsInput
+  priceId: StringFieldUpdateOperationsInput
+  quantity: IntFieldUpdateOperationsInput
+  cancelAtPeriodEnd: BoolFieldUpdateOperationsInput
+  currentPeriodStartAt: NullableDateTimeFieldUpdateOperationsInput
+  currentPeriodEndAt: NullableDateTimeFieldUpdateOperationsInput
+  endedAt: NullableDateTimeFieldUpdateOperationsInput
+  cancelAt: NullableDateTimeFieldUpdateOperationsInput
+  canceledAat: NullableDateTimeFieldUpdateOperationsInput
+  trialStartAt: NullableDateTimeFieldUpdateOperationsInput
+  trialEndAt: NullableDateTimeFieldUpdateOperationsInput
+  stripeSubscriptionId: NullableStringFieldUpdateOperationsInput
+  metaData: Json
+  createdAt: DateTimeFieldUpdateOperationsInput
+  updatedAt: DateTimeFieldUpdateOperationsInput
+}
+
+input PriceCreateManyProductInput {
+  id: String
+  active: Boolean
+  description: String
+  unitAmount: Int
+  currency: String
+  type: pricingType
+  interval: pricingInterval
+  intervalCount: Int
+  trialPeriod: Int
+  stripePriceId: String
+  metaData: Json
+  createdAt: DateTime
+  updatedAt: DateTime
+}
+
+input PriceUpdateWithoutProductInput {
+  id: StringFieldUpdateOperationsInput
+  active: BoolFieldUpdateOperationsInput
+  description: NullableStringFieldUpdateOperationsInput
+  unitAmount: NullableIntFieldUpdateOperationsInput
+  currency: NullableStringFieldUpdateOperationsInput
+  type: EnumpricingTypeFieldUpdateOperationsInput
+  interval: EnumpricingIntervalFieldUpdateOperationsInput
+  intervalCount: NullableIntFieldUpdateOperationsInput
+  trialPeriod: NullableIntFieldUpdateOperationsInput
+  stripePriceId: NullableStringFieldUpdateOperationsInput
+  metaData: Json
+  createdAt: DateTimeFieldUpdateOperationsInput
+  updatedAt: DateTimeFieldUpdateOperationsInput
+  subscriptions: SubscriptionUpdateManyWithoutPriceInput
+}
+
+input PriceUncheckedUpdateWithoutProductInput {
+  id: StringFieldUpdateOperationsInput
+  active: BoolFieldUpdateOperationsInput
+  description: NullableStringFieldUpdateOperationsInput
+  unitAmount: NullableIntFieldUpdateOperationsInput
+  currency: NullableStringFieldUpdateOperationsInput
+  type: EnumpricingTypeFieldUpdateOperationsInput
+  interval: EnumpricingIntervalFieldUpdateOperationsInput
+  intervalCount: NullableIntFieldUpdateOperationsInput
+  trialPeriod: NullableIntFieldUpdateOperationsInput
+  stripePriceId: NullableStringFieldUpdateOperationsInput
+  metaData: Json
+  createdAt: DateTimeFieldUpdateOperationsInput
+  updatedAt: DateTimeFieldUpdateOperationsInput
+  subscriptions: SubscriptionUncheckedUpdateManyWithoutPriceInput
+}
+
+input PriceUncheckedUpdateManyWithoutPricesInput {
+  id: StringFieldUpdateOperationsInput
+  active: BoolFieldUpdateOperationsInput
+  description: NullableStringFieldUpdateOperationsInput
+  unitAmount: NullableIntFieldUpdateOperationsInput
+  currency: NullableStringFieldUpdateOperationsInput
+  type: EnumpricingTypeFieldUpdateOperationsInput
+  interval: EnumpricingIntervalFieldUpdateOperationsInput
+  intervalCount: NullableIntFieldUpdateOperationsInput
+  trialPeriod: NullableIntFieldUpdateOperationsInput
+  stripePriceId: NullableStringFieldUpdateOperationsInput
+  metaData: Json
+  createdAt: DateTimeFieldUpdateOperationsInput
+  updatedAt: DateTimeFieldUpdateOperationsInput
+}
+
+input SubscriptionCreateManyPriceInput {
+  id: Int
+  status: subscriptionStatus
+  customerId: String!
+  quantity: Int
+  cancelAtPeriodEnd: Boolean
+  currentPeriodStartAt: DateTime
+  currentPeriodEndAt: DateTime
+  endedAt: DateTime
+  cancelAt: DateTime
+  canceledAat: DateTime
+  trialStartAt: DateTime
+  trialEndAt: DateTime
+  stripeSubscriptionId: String
+  metaData: Json
+  createdAt: DateTime
+  updatedAt: DateTime
+}
+
+input SubscriptionUpdateWithoutPriceInput {
+  status: EnumsubscriptionStatusFieldUpdateOperationsInput
+  quantity: IntFieldUpdateOperationsInput
+  cancelAtPeriodEnd: BoolFieldUpdateOperationsInput
+  currentPeriodStartAt: NullableDateTimeFieldUpdateOperationsInput
+  currentPeriodEndAt: NullableDateTimeFieldUpdateOperationsInput
+  endedAt: NullableDateTimeFieldUpdateOperationsInput
+  cancelAt: NullableDateTimeFieldUpdateOperationsInput
+  canceledAat: NullableDateTimeFieldUpdateOperationsInput
+  trialStartAt: NullableDateTimeFieldUpdateOperationsInput
+  trialEndAt: NullableDateTimeFieldUpdateOperationsInput
+  stripeSubscriptionId: NullableStringFieldUpdateOperationsInput
+  metaData: Json
+  createdAt: DateTimeFieldUpdateOperationsInput
+  updatedAt: DateTimeFieldUpdateOperationsInput
+  customer: CustomerUpdateOneRequiredWithoutSubscriptionsInput
+}
+
+input SubscriptionUncheckedUpdateWithoutPriceInput {
+  id: IntFieldUpdateOperationsInput
+  status: EnumsubscriptionStatusFieldUpdateOperationsInput
+  customerId: StringFieldUpdateOperationsInput
+  quantity: IntFieldUpdateOperationsInput
+  cancelAtPeriodEnd: BoolFieldUpdateOperationsInput
+  currentPeriodStartAt: NullableDateTimeFieldUpdateOperationsInput
+  currentPeriodEndAt: NullableDateTimeFieldUpdateOperationsInput
+  endedAt: NullableDateTimeFieldUpdateOperationsInput
+  cancelAt: NullableDateTimeFieldUpdateOperationsInput
+  canceledAat: NullableDateTimeFieldUpdateOperationsInput
+  trialStartAt: NullableDateTimeFieldUpdateOperationsInput
+  trialEndAt: NullableDateTimeFieldUpdateOperationsInput
+  stripeSubscriptionId: NullableStringFieldUpdateOperationsInput
+  metaData: Json
+  createdAt: DateTimeFieldUpdateOperationsInput
+  updatedAt: DateTimeFieldUpdateOperationsInput
+}
+
+type AggregateUser {
+  _count: UserCountAggregateOutputType
+  _min: UserMinAggregateOutputType
+  _max: UserMaxAggregateOutputType
+}
+
+type AggregateTenant {
+  _count: TenantCountAggregateOutputType
+  _min: TenantMinAggregateOutputType
+  _max: TenantMaxAggregateOutputType
+}
+
+type AggregateCustomer {
+  _count: CustomerCountAggregateOutputType
+  _min: CustomerMinAggregateOutputType
+  _max: CustomerMaxAggregateOutputType
+}
+
+type AggregateProduct {
+  _count: ProductCountAggregateOutputType
+  _min: ProductMinAggregateOutputType
+  _max: ProductMaxAggregateOutputType
+}
+
+type AggregatePrice {
+  _count: PriceCountAggregateOutputType
+  _avg: PriceAvgAggregateOutputType
+  _sum: PriceSumAggregateOutputType
+  _min: PriceMinAggregateOutputType
+  _max: PriceMaxAggregateOutputType
+}
+
+type AggregateSubscription {
+  _count: SubscriptionCountAggregateOutputType
+  _avg: SubscriptionAvgAggregateOutputType
+  _sum: SubscriptionSumAggregateOutputType
+  _min: SubscriptionMinAggregateOutputType
+  _max: SubscriptionMaxAggregateOutputType
+}
+
+type UserCountAggregateOutputType {
+  id: Int!
+  active: Int!
+  name: Int!
+  email: Int!
+  mobile: Int!
+  cognitoUserId: Int!
+  cognitoPoolId: Int!
+  role: Int!
+  createdAt: Int!
+  updatedAt: Int!
+  _all: Int!
+}
+
+type UserMinAggregateOutputType {
+  id: String
+  active: Boolean
+  name: String
+  email: String
+  mobile: String
+  cognitoUserId: String
+  cognitoPoolId: String
+  role: UserRole
+  createdAt: DateTime
+  updatedAt: DateTime
+}
+
+type UserMaxAggregateOutputType {
+  id: String
+  active: Boolean
+  name: String
+  email: String
+  mobile: String
+  cognitoUserId: String
+  cognitoPoolId: String
+  role: UserRole
+  createdAt: DateTime
+  updatedAt: DateTime
+}
+
+type TenantCountAggregateOutputType {
+  id: Int!
+  active: Int!
+  name: Int!
+  metaData: Int!
+  createdAt: Int!
+  updatedAt: Int!
+  _all: Int!
+}
+
+type TenantMinAggregateOutputType {
+  id: String
+  active: Boolean
+  name: String
+  createdAt: DateTime
+  updatedAt: DateTime
+}
+
+type TenantMaxAggregateOutputType {
+  id: String
+  active: Boolean
+  name: String
+  createdAt: DateTime
+  updatedAt: DateTime
+}
+
+type CustomerCountOutputType {
+  subscriptions: Int!
+}
+
+type CustomerCountAggregateOutputType {
+  id: Int!
+  active: Int!
+  tenantId: Int!
+  name: Int!
+  email: Int!
+  mobile: Int!
+  cognitoUserId: Int!
+  cognitoPoolId: Int!
+  stripeCustomerId: Int!
+  stripeBillingAddress: Int!
+  stripePaymentMethod: Int!
+  metaData: Int!
+  createdAt: Int!
+  updatedAt: Int!
+  _all: Int!
+}
+
+type CustomerMinAggregateOutputType {
+  id: String
+  active: Boolean
+  tenantId: String
+  name: String
+  email: String
+  mobile: String
+  cognitoUserId: String
+  cognitoPoolId: String
+  stripeCustomerId: String
+  createdAt: DateTime
+  updatedAt: DateTime
+}
+
+type CustomerMaxAggregateOutputType {
+  id: String
+  active: Boolean
+  tenantId: String
+  name: String
+  email: String
+  mobile: String
+  cognitoUserId: String
+  cognitoPoolId: String
+  stripeCustomerId: String
+  createdAt: DateTime
+  updatedAt: DateTime
+}
+
+type ProductCountOutputType {
+  prices: Int!
+}
+
+type ProductCountAggregateOutputType {
+  id: Int!
+  active: Int!
+  name: Int!
+  image: Int!
+  description: Int!
+  stripeProductId: Int!
+  metaData: Int!
+  createdAt: Int!
+  updatedAt: Int!
+  _all: Int!
+}
+
+type ProductMinAggregateOutputType {
+  id: String
+  active: Boolean
+  name: String
+  image: String
+  description: String
+  stripeProductId: String
+  createdAt: DateTime
+  updatedAt: DateTime
+}
+
+type ProductMaxAggregateOutputType {
+  id: String
+  active: Boolean
+  name: String
+  image: String
+  description: String
+  stripeProductId: String
+  createdAt: DateTime
+  updatedAt: DateTime
+}
+
+type PriceCountOutputType {
+  subscriptions: Int!
+}
+
+type PriceCountAggregateOutputType {
+  id: Int!
+  active: Int!
+  productId: Int!
+  description: Int!
+  unitAmount: Int!
+  currency: Int!
+  type: Int!
+  interval: Int!
+  intervalCount: Int!
+  trialPeriod: Int!
+  stripePriceId: Int!
+  metaData: Int!
+  createdAt: Int!
+  updatedAt: Int!
+  _all: Int!
+}
+
+type PriceAvgAggregateOutputType {
+  unitAmount: Float
+  intervalCount: Float
+  trialPeriod: Float
+}
+
+type PriceSumAggregateOutputType {
+  unitAmount: Int
+  intervalCount: Int
+  trialPeriod: Int
+}
+
+type PriceMinAggregateOutputType {
+  id: String
+  active: Boolean
+  productId: String
+  description: String
+  unitAmount: Int
+  currency: String
+  type: pricingType
+  interval: pricingInterval
+  intervalCount: Int
+  trialPeriod: Int
+  stripePriceId: String
+  createdAt: DateTime
+  updatedAt: DateTime
+}
+
+type PriceMaxAggregateOutputType {
+  id: String
+  active: Boolean
+  productId: String
+  description: String
+  unitAmount: Int
+  currency: String
+  type: pricingType
+  interval: pricingInterval
+  intervalCount: Int
+  trialPeriod: Int
+  stripePriceId: String
+  createdAt: DateTime
+  updatedAt: DateTime
+}
+
+type SubscriptionCountAggregateOutputType {
+  id: Int!
+  status: Int!
+  customerId: Int!
+  priceId: Int!
+  quantity: Int!
+  cancelAtPeriodEnd: Int!
+  currentPeriodStartAt: Int!
+  currentPeriodEndAt: Int!
+  endedAt: Int!
+  cancelAt: Int!
+  canceledAat: Int!
+  trialStartAt: Int!
+  trialEndAt: Int!
+  stripeSubscriptionId: Int!
+  metaData: Int!
+  createdAt: Int!
+  updatedAt: Int!
+  _all: Int!
+}
+
+type SubscriptionAvgAggregateOutputType {
+  id: Float
+  quantity: Float
+}
+
+type SubscriptionSumAggregateOutputType {
+  id: Int
+  quantity: Int
+}
+
+type SubscriptionMinAggregateOutputType {
+  id: Int
+  status: subscriptionStatus
+  customerId: String
+  priceId: String
+  quantity: Int
+  cancelAtPeriodEnd: Boolean
+  currentPeriodStartAt: DateTime
+  currentPeriodEndAt: DateTime
+  endedAt: DateTime
+  cancelAt: DateTime
+  canceledAat: DateTime
+  trialStartAt: DateTime
+  trialEndAt: DateTime
+  stripeSubscriptionId: String
+  createdAt: DateTime
+  updatedAt: DateTime
+}
+
+type SubscriptionMaxAggregateOutputType {
+  id: Int
+  status: subscriptionStatus
+  customerId: String
+  priceId: String
+  quantity: Int
+  cancelAtPeriodEnd: Boolean
+  currentPeriodStartAt: DateTime
+  currentPeriodEndAt: DateTime
+  endedAt: DateTime
+  cancelAt: DateTime
+  canceledAat: DateTime
+  trialStartAt: DateTime
+  trialEndAt: DateTime
+  stripeSubscriptionId: String
+  createdAt: DateTime
+  updatedAt: DateTime
+}
+
+scalar Json
+
+type User {
+  id: String!
+  active: Boolean!
+  name: String
+  email: String!
+  mobile: String
+  cognitoUserId: String
+  cognitoPoolId: String
+  role: UserRole!
+  createdAt: DateTime!
+  updatedAt: DateTime!
+}
+
+type Query {
+  findUniqueUser(where: UserWhereUniqueInput!): User
+  findFirstUser(where: UserWhereInput, orderBy: [UserOrderByWithRelationInput], cursor: UserWhereUniqueInput, take: Int, skip: Int, distinct: [UserScalarFieldEnum]): User
+  findManyUser(where: UserWhereInput, orderBy: [UserOrderByWithRelationInput], cursor: UserWhereUniqueInput, take: Int, skip: Int, distinct: [UserScalarFieldEnum]): [User!]
+  findManyUserCount(where: UserWhereInput, orderBy: [UserOrderByWithRelationInput], cursor: UserWhereUniqueInput, take: Int, skip: Int, distinct: [UserScalarFieldEnum]): Int!
+  aggregateUser(where: UserWhereInput, orderBy: [UserOrderByWithRelationInput], cursor: UserWhereUniqueInput, take: Int, skip: Int): AggregateUser
+  findUniqueTenant(where: TenantWhereUniqueInput!): Tenant
+  findFirstTenant(where: TenantWhereInput, orderBy: [TenantOrderByWithRelationInput], cursor: TenantWhereUniqueInput, take: Int, skip: Int, distinct: [TenantScalarFieldEnum]): Tenant
+  findManyTenant(where: TenantWhereInput, orderBy: [TenantOrderByWithRelationInput], cursor: TenantWhereUniqueInput, take: Int, skip: Int, distinct: [TenantScalarFieldEnum]): [Tenant!]
+  findManyTenantCount(where: TenantWhereInput, orderBy: [TenantOrderByWithRelationInput], cursor: TenantWhereUniqueInput, take: Int, skip: Int, distinct: [TenantScalarFieldEnum]): Int!
+  aggregateTenant(where: TenantWhereInput, orderBy: [TenantOrderByWithRelationInput], cursor: TenantWhereUniqueInput, take: Int, skip: Int): AggregateTenant
+  findUniqueCustomer(where: CustomerWhereUniqueInput!): Customer
+  findFirstCustomer(where: CustomerWhereInput, orderBy: [CustomerOrderByWithRelationInput], cursor: CustomerWhereUniqueInput, take: Int, skip: Int, distinct: [CustomerScalarFieldEnum]): Customer
+  findManyCustomer(where: CustomerWhereInput, orderBy: [CustomerOrderByWithRelationInput], cursor: CustomerWhereUniqueInput, take: Int, skip: Int, distinct: [CustomerScalarFieldEnum]): [Customer!]
+  findManyCustomerCount(where: CustomerWhereInput, orderBy: [CustomerOrderByWithRelationInput], cursor: CustomerWhereUniqueInput, take: Int, skip: Int, distinct: [CustomerScalarFieldEnum]): Int!
+  aggregateCustomer(where: CustomerWhereInput, orderBy: [CustomerOrderByWithRelationInput], cursor: CustomerWhereUniqueInput, take: Int, skip: Int): AggregateCustomer
+  findUniqueProduct(where: ProductWhereUniqueInput!): Product
+  findFirstProduct(where: ProductWhereInput, orderBy: [ProductOrderByWithRelationInput], cursor: ProductWhereUniqueInput, take: Int, skip: Int, distinct: [ProductScalarFieldEnum]): Product
+  findManyProduct(where: ProductWhereInput, orderBy: [ProductOrderByWithRelationInput], cursor: ProductWhereUniqueInput, take: Int, skip: Int, distinct: [ProductScalarFieldEnum]): [Product!]
+  findManyProductCount(where: ProductWhereInput, orderBy: [ProductOrderByWithRelationInput], cursor: ProductWhereUniqueInput, take: Int, skip: Int, distinct: [ProductScalarFieldEnum]): Int!
+  aggregateProduct(where: ProductWhereInput, orderBy: [ProductOrderByWithRelationInput], cursor: ProductWhereUniqueInput, take: Int, skip: Int): AggregateProduct
+  findUniquePrice(where: PriceWhereUniqueInput!): Price
+  findFirstPrice(where: PriceWhereInput, orderBy: [PriceOrderByWithRelationInput], cursor: PriceWhereUniqueInput, take: Int, skip: Int, distinct: [PriceScalarFieldEnum]): Price
+  findManyPrice(where: PriceWhereInput, orderBy: [PriceOrderByWithRelationInput], cursor: PriceWhereUniqueInput, take: Int, skip: Int, distinct: [PriceScalarFieldEnum]): [Price!]
+  findManyPriceCount(where: PriceWhereInput, orderBy: [PriceOrderByWithRelationInput], cursor: PriceWhereUniqueInput, take: Int, skip: Int, distinct: [PriceScalarFieldEnum]): Int!
+  aggregatePrice(where: PriceWhereInput, orderBy: [PriceOrderByWithRelationInput], cursor: PriceWhereUniqueInput, take: Int, skip: Int): AggregatePrice
+  findUniqueSubscription(where: SubscriptionWhereUniqueInput!): Subscription
+  findFirstSubscription(where: SubscriptionWhereInput, orderBy: [SubscriptionOrderByWithRelationInput], cursor: SubscriptionWhereUniqueInput, take: Int, skip: Int, distinct: [SubscriptionScalarFieldEnum]): Subscription
+  findManySubscription(where: SubscriptionWhereInput, orderBy: [SubscriptionOrderByWithRelationInput], cursor: SubscriptionWhereUniqueInput, take: Int, skip: Int, distinct: [SubscriptionScalarFieldEnum]): [Subscription!]
+  findManySubscriptionCount(where: SubscriptionWhereInput, orderBy: [SubscriptionOrderByWithRelationInput], cursor: SubscriptionWhereUniqueInput, take: Int, skip: Int, distinct: [SubscriptionScalarFieldEnum]): Int!
+  aggregateSubscription(where: SubscriptionWhereInput, orderBy: [SubscriptionOrderByWithRelationInput], cursor: SubscriptionWhereUniqueInput, take: Int, skip: Int): AggregateSubscription
+}
+
+type Mutation {
+  createOneUser(data: UserCreateInput!): User!
+  updateOneUser(data: UserUpdateInput!, where: UserWhereUniqueInput!): User!
+  deleteOneUser(where: UserWhereUniqueInput!): User
+  upsertOneUser(where: UserWhereUniqueInput!, create: UserCreateInput!, update: UserUpdateInput!): User
+  deleteManyUser(where: UserWhereInput): BatchPayload
+  updateManyUser(data: UserUpdateManyMutationInput!, where: UserWhereInput): BatchPayload
+  createOneTenant(data: TenantCreateInput!): Tenant!
+  updateOneTenant(data: TenantUpdateInput!, where: TenantWhereUniqueInput!): Tenant!
+  deleteOneTenant(where: TenantWhereUniqueInput!): Tenant
+  upsertOneTenant(where: TenantWhereUniqueInput!, create: TenantCreateInput!, update: TenantUpdateInput!): Tenant
+  deleteManyTenant(where: TenantWhereInput): BatchPayload
+  updateManyTenant(data: TenantUpdateManyMutationInput!, where: TenantWhereInput): BatchPayload
+  createOneCustomer(data: CustomerCreateInput!): Customer!
+  updateOneCustomer(data: CustomerUpdateInput!, where: CustomerWhereUniqueInput!): Customer!
+  deleteOneCustomer(where: CustomerWhereUniqueInput!): Customer
+  upsertOneCustomer(where: CustomerWhereUniqueInput!, create: CustomerCreateInput!, update: CustomerUpdateInput!): Customer
+  deleteManyCustomer(where: CustomerWhereInput): BatchPayload
+  updateManyCustomer(data: CustomerUpdateManyMutationInput!, where: CustomerWhereInput): BatchPayload
+  createOneProduct(data: ProductCreateInput!): Product!
+  updateOneProduct(data: ProductUpdateInput!, where: ProductWhereUniqueInput!): Product!
+  deleteOneProduct(where: ProductWhereUniqueInput!): Product
+  upsertOneProduct(where: ProductWhereUniqueInput!, create: ProductCreateInput!, update: ProductUpdateInput!): Product
+  deleteManyProduct(where: ProductWhereInput): BatchPayload
+  updateManyProduct(data: ProductUpdateManyMutationInput!, where: ProductWhereInput): BatchPayload
+  createOnePrice(data: PriceCreateInput!): Price!
+  updateOnePrice(data: PriceUpdateInput!, where: PriceWhereUniqueInput!): Price!
+  deleteOnePrice(where: PriceWhereUniqueInput!): Price
+  upsertOnePrice(where: PriceWhereUniqueInput!, create: PriceCreateInput!, update: PriceUpdateInput!): Price
+  deleteManyPrice(where: PriceWhereInput): BatchPayload
+  updateManyPrice(data: PriceUpdateManyMutationInput!, where: PriceWhereInput): BatchPayload
+  createOneSubscription(data: SubscriptionCreateInput!): Subscription!
+  updateOneSubscription(data: SubscriptionUpdateInput!, where: SubscriptionWhereUniqueInput!): Subscription!
+  deleteOneSubscription(where: SubscriptionWhereUniqueInput!): Subscription
+  upsertOneSubscription(where: SubscriptionWhereUniqueInput!, create: SubscriptionCreateInput!, update: SubscriptionUpdateInput!): Subscription
+  deleteManySubscription(where: SubscriptionWhereInput): BatchPayload
+  updateManySubscription(data: SubscriptionUpdateManyMutationInput!, where: SubscriptionWhereInput): BatchPayload
+}
+
+type Tenant {
+  id: String!
+  active: Boolean!
+  customer: Customer
+  name: String
+  metaData: Json
+  createdAt: DateTime!
+  updatedAt: DateTime!
+}
+
+type Customer {
+  id: String!
+  active: Boolean!
+  tenant: Tenant!
+  tenantId: String!
+  name: String
+  email: String!
+  mobile: String
+  cognitoUserId: String
+  cognitoPoolId: String
+  stripeCustomerId: String
+  stripeBillingAddress: Json
+  stripePaymentMethod: Json
+  metaData: Json
+  subscriptions(where: SubscriptionWhereInput, orderBy: SubscriptionOrderByWithRelationInput, cursor: SubscriptionWhereUniqueInput, take: Int, skip: Int, distinct: SubscriptionScalarFieldEnum): [Subscription!]!
+  createdAt: DateTime!
+  updatedAt: DateTime!
+  _count: CustomerCountOutputType
+}
+
+type Product {
+  id: String!
+  active: Boolean!
+  name: String
+  image: String
+  description: String
+  stripeProductId: String
+  metaData: Json
+  prices(where: PriceWhereInput, orderBy: PriceOrderByWithRelationInput, cursor: PriceWhereUniqueInput, take: Int, skip: Int, distinct: PriceScalarFieldEnum): [Price!]!
+  createdAt: DateTime!
+  updatedAt: DateTime!
+  _count: ProductCountOutputType
+}
+
+type Price {
+  id: String!
+  active: Boolean!
+  product: Product!
+  productId: String!
+  description: String
+  unitAmount: Int
+  currency: String
+  type: pricingType!
+  interval: pricingInterval!
+  intervalCount: Int
+  trialPeriod: Int
+  stripePriceId: String
+  metaData: Json
+  subscriptions(where: SubscriptionWhereInput, orderBy: SubscriptionOrderByWithRelationInput, cursor: SubscriptionWhereUniqueInput, take: Int, skip: Int, distinct: SubscriptionScalarFieldEnum): [Subscription!]!
+  createdAt: DateTime!
+  updatedAt: DateTime!
+  _count: PriceCountOutputType
+}
+
+type Subscription {
+  id: Int!
+  status: subscriptionStatus!
+  customer: Customer!
+  customerId: String!
+  price: Price!
+  priceId: String!
+  quantity: Int!
+  cancelAtPeriodEnd: Boolean!
+  currentPeriodStartAt: DateTime
+  currentPeriodEndAt: DateTime
+  endedAt: DateTime
+  cancelAt: DateTime
+  canceledAat: DateTime
+  trialStartAt: DateTime
+  trialEndAt: DateTime
+  stripeSubscriptionId: String
+  metaData: Json
+  createdAt: DateTime!
+  updatedAt: DateTime!
+}
